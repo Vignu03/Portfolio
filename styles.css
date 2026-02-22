@@ -1386,3 +1386,263 @@ section {
     justify-content: center;
   }
 }
+
+/* ════════════════════════════════════════════════
+   PROJECT CARD BANNER HOVER ANIMATIONS
+   ════════════════════════════════════════════════ */
+
+/* --- Shared banner system --- */
+.banner-icon-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.project-card:hover .banner-icon-wrap {
+  opacity: 0;
+}
+
+.banner-scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.project-card:hover .banner-scene {
+  opacity: 1;
+}
+
+/* ─── XR Simulation: Torch → Mirror → Deflected Ray ─── */
+.xr-torch {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  font-size: 2rem;
+  filter: drop-shadow(0 0 10px rgba(255, 224, 102, 0.9));
+}
+
+.xr-mirror {
+  position: absolute;
+  right: 50px;
+  top: calc(50% - 32px);
+  width: 13px;
+  height: 64px;
+  border: 3.5px solid #81d4fa;
+  border-right: none;
+  border-radius: 50% 0 0 50%;
+  box-shadow: -6px 0 16px rgba(129, 212, 250, 0.7);
+}
+
+.xr-hbeam {
+  position: absolute;
+  left: 58px;
+  top: calc(50% - 1.5px);
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, #ffe566, rgba(255, 229, 102, 0.1));
+  box-shadow: 0 0 10px #ffe566, 0 0 20px rgba(255, 229, 102, 0.4);
+  border-radius: 2px;
+}
+
+.xr-rbeam {
+  position: absolute;
+  right: 49px;
+  top: calc(50% - 1.5px);
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, #ffba00, rgba(255, 186, 0, 0.1));
+  box-shadow: 0 0 10px #ffba00, 0 0 20px rgba(255, 186, 0, 0.4);
+  border-radius: 2px;
+  transform-origin: left center;
+  transform: rotate(-50deg);
+}
+
+.project-card:hover .xr-hbeam {
+  animation: xrBeamH 0.5s ease-out 0.2s both;
+}
+
+.project-card:hover .xr-rbeam {
+  animation: xrBeamR 0.45s ease-out 0.72s both;
+}
+
+@keyframes xrBeamH {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 205px;
+  }
+}
+
+@keyframes xrBeamR {
+  from {
+    width: 0;
+    opacity: 0.4;
+  }
+
+  to {
+    width: 90px;
+    opacity: 1;
+  }
+}
+
+/* ─── FPS Game: Gun → Bullet → Target Falls ─── */
+.fps-gun {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.2rem;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.25));
+}
+
+.fps-target {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2.4rem;
+}
+
+.fps-bullet {
+  position: absolute;
+  left: 68px;
+  top: calc(50% - 5px);
+  width: 16px;
+  height: 9px;
+  background: radial-gradient(ellipse at 30% 50%, #fffde7 20%, #ffd700 100%);
+  border-radius: 50% 30% 30% 50%;
+  box-shadow: 0 0 10px #ffd700, 4px 0 20px rgba(255, 215, 0, 0.7);
+  opacity: 0;
+}
+
+.project-card:hover .fps-bullet {
+  animation: fpsShoot 0.36s ease-in 0.2s both;
+}
+
+.project-card:hover .fps-target {
+  animation: fpsFall 0.5s ease-in 0.56s both;
+}
+
+@keyframes fpsShoot {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  82% {
+    opacity: 1;
+    transform: translateX(235px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(255px);
+  }
+}
+
+@keyframes fpsFall {
+  0% {
+    opacity: 1;
+    transform: translateY(-50%) rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(-44%) rotate(-12deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(55px) rotate(55deg);
+  }
+}
+
+/* ─── Flap with Caution: Bird Rainbow Arc ─── */
+.flap-bird {
+  position: absolute;
+  left: 5%;
+  top: 68%;
+  font-size: 1.8rem;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.project-card:hover .flap-bird {
+  animation: birdSoar 1.15s ease-in-out 0.1s both;
+}
+
+@keyframes birdSoar {
+  0% {
+    opacity: 0;
+    transform: translate(0px, 0px);
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  25% {
+    transform: translate(75px, -65px);
+  }
+
+  50% {
+    transform: translate(160px, -95px);
+  }
+
+  75% {
+    transform: translate(245px, -62px);
+  }
+
+  95% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(315px, 0px);
+  }
+}
+
+/* ─── Full Stack: Gold-Navy theme reveal on hover ─── */
+.banner-fullstack-scene {
+  background: linear-gradient(135deg, #0f2744 0%, #b8952a 45%, #1b4f6e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-fullstack-scene::after {
+  content: '{ }';
+  color: rgba(255, 255, 255, 0.12);
+  font-family: 'Courier New', monospace;
+  font-size: 5.5rem;
+  font-weight: 900;
+  letter-spacing: -5px;
+  text-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
+  animation: codePulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes codePulse {
+  from {
+    color: rgba(255, 255, 255, 0.10);
+    text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+  }
+
+  to {
+    color: rgba(255, 255, 255, 0.22);
+    text-shadow: 0 0 60px rgba(212, 175, 55, 0.7);
+  }
+}

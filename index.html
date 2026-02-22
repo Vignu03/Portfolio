@@ -212,11 +212,18 @@
 
         <!-- Project 1: Light Rays VR -->
         <a href="projects/light-rays-vr.html" class="project-card reveal">
-          <div class="project-card-banner"
-            style="background: linear-gradient(135deg, #0f2744, #1b3a5c); display:flex; align-items:center; justify-content:center;">
-            <div style="text-align:center; color:white; padding:20px;">
+          <div class="project-card-banner" style="background: linear-gradient(135deg, #0f2744, #1b3a5c);">
+            <!-- Default: icon + label -->
+            <div class="banner-icon-wrap">
               <div style="font-size:3rem; margin-bottom:10px;">🔬</div>
               <div style="font-family:var(--font-heading); font-size:1.2rem; font-weight:700;">XR Simulation</div>
+            </div>
+            <!-- Hover: Torch → Beam → Concave Mirror → Deflected Ray -->
+            <div class="banner-scene">
+              <span class="xr-torch">🔦</span>
+              <div class="xr-hbeam"></div>
+              <div class="xr-mirror"></div>
+              <div class="xr-rbeam"></div>
             </div>
           </div>
           <div class="project-card-body">
@@ -234,11 +241,17 @@
 
         <!-- Project 2: Operation CrossFire -->
         <a href="projects/operation-crossfire.html" class="project-card reveal">
-          <div class="project-card-banner"
-            style="background: linear-gradient(135deg, #8b0000, #c0392b); display:flex; align-items:center; justify-content:center;">
-            <div style="text-align:center; color:white; padding:20px;">
+          <div class="project-card-banner" style="background: linear-gradient(135deg, #8b0000, #c0392b);">
+            <!-- Default: icon + label -->
+            <div class="banner-icon-wrap">
               <div style="font-size:3rem; margin-bottom:10px;">🎯</div>
               <div style="font-family:var(--font-heading); font-size:1.2rem; font-weight:700;">FPS Game</div>
+            </div>
+            <!-- Hover: Gun shoots bullet, target falls -->
+            <div class="banner-scene">
+              <span class="fps-gun">🔫</span>
+              <div class="fps-bullet"></div>
+              <span class="fps-target">🎯</span>
             </div>
           </div>
           <div class="project-card-body">
@@ -255,11 +268,15 @@
 
         <!-- Project 3: Flap with Caution -->
         <a href="projects/flap-with-caution.html" class="project-card reveal">
-          <div class="project-card-banner"
-            style="background: linear-gradient(135deg, #b8952a, #d4af37); display:flex; align-items:center; justify-content:center;">
-            <div style="text-align:center; color:white; padding:20px;">
+          <div class="project-card-banner" style="background: linear-gradient(135deg, #b8952a, #d4af37);">
+            <!-- Default: icon + label -->
+            <div class="banner-icon-wrap">
               <div style="font-size:3rem; margin-bottom:10px;">🐦</div>
               <div style="font-family:var(--font-heading); font-size:1.2rem; font-weight:700;">Game Development</div>
+            </div>
+            <!-- Hover: Bird flies in rainbow arc -->
+            <div class="banner-scene">
+              <span class="flap-bird">🐦</span>
             </div>
           </div>
           <div class="project-card-body">
@@ -276,12 +293,14 @@
 
         <!-- Project 4: Institution Management System -->
         <a href="projects/institution-management.html" class="project-card reveal">
-          <div class="project-card-banner"
-            style="background: linear-gradient(135deg, #1b3a5c, #2a5a8c); display:flex; align-items:center; justify-content:center;">
-            <div style="text-align:center; color:white; padding:20px;">
+          <div class="project-card-banner" style="background: linear-gradient(135deg, #1b3a5c, #2a5a8c);">
+            <!-- Default: icon + label -->
+            <div class="banner-icon-wrap">
               <div style="font-size:3rem; margin-bottom:10px;">🏛️</div>
               <div style="font-family:var(--font-heading); font-size:1.2rem; font-weight:700;">Full Stack Web App</div>
             </div>
+            <!-- Hover: Gold-Navy theme gradient reveal -->
+            <div class="banner-scene banner-fullstack-scene"></div>
           </div>
           <div class="project-card-body">
             <span class="project-card-type">Full Stack</span>
