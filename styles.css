@@ -1642,8 +1642,7 @@ section {
 
 /* ─── Full Stack: Gold-Navy theme reveal on hover ─── */
 .banner-fullstack-scene {
-  background: #0d1117;
-  /* GitHub dark terminal feel */
+  /* inherits the card's navy/blue gradient — no override needed */
   align-items: flex-start;
   justify-content: flex-start;
 }

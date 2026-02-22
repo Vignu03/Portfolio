@@ -305,48 +305,106 @@
               <div class="fs-code-scroll">
                 <span class="fs-kw">import</span> django<br>
                 <span class="fs-kw">from</span> django.db <span class="fs-kw">import</span> models<br>
-                <span class="fs-kw">from</span> django.http <span class="fs-kw">import</span> JsonResponse<br>
+                <span class="fs-kw">from</span> django.http <span class="fs-kw">import</span> JsonResponse,
+                HttpResponse<br>
+                <span class="fs-kw">from</span> django.views <span class="fs-kw">import</span> View<br>
+                <span class="fs-kw">from</span> django.contrib.auth.decorators <span class="fs-kw">import</span>
+                login_required<br>
+                <span class="fs-kw">from</span> django.shortcuts <span class="fs-kw">import</span> render, redirect<br>
+                <span class="fs-kw">from</span> django.urls <span class="fs-kw">import</span> path<br>
                 <br>
                 <span class="fs-kw">class</span> <span class="fs-cls">Student</span>(models.Model):<br>
-                &nbsp;&nbsp;name = models.CharField(max_length=<span class="fs-num">100</span>)<br>
-                &nbsp;&nbsp;roll = models.IntegerField(unique=<span class="fs-kw">True</span>)<br>
-                &nbsp;&nbsp;cgpa = models.FloatField()<br>
+                &nbsp;&nbsp;name &nbsp;= models.CharField(max_length=<span class="fs-num">100</span>)<br>
+                &nbsp;&nbsp;roll &nbsp;= models.IntegerField(unique=<span class="fs-kw">True</span>)<br>
+                &nbsp;&nbsp;cgpa &nbsp;= models.FloatField(default=<span class="fs-num">0.0</span>)<br>
+                &nbsp;&nbsp;dept &nbsp;= models.CharField(max_length=<span class="fs-num">60</span>)<br>
+                &nbsp;&nbsp;year &nbsp;= models.IntegerField(default=<span class="fs-num">1</span>)<br>
+                &nbsp;&nbsp;email = models.EmailField(unique=<span class="fs-kw">True</span>)<br>
+                <br>
+                &nbsp;&nbsp;class <span class="fs-cls">Meta</span>:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;ordering = [<span class="fs-str">'roll'</span>]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;verbose_name = <span class="fs-str">'Student'</span><br>
                 <br>
                 &nbsp;&nbsp;<span class="fs-kw">def</span> <span class="fs-fn">__str__</span>(<span
                   class="fs-kw">self</span>):<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-kw">return</span> <span class="fs-str">f"</span><span
-                  class="fs-str">{self.name}"</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-kw">return</span> <span class="fs-str">f"{self.name}
+                  ({self.roll})"</span><br>
                 <br>
-                <span class="fs-kw">def</span> <span class="fs-fn">get_students</span>(request):<br>
-                &nbsp;&nbsp;qs = Student.objects.all()<br>
-                &nbsp;&nbsp;data = list(qs.values())<br>
-                &nbsp;&nbsp;<span class="fs-kw">return</span> JsonResponse({<span class="fs-str">'students'</span>:
-                data})<br>
+                <span class="fs-kw">class</span> <span class="fs-cls">StudentListView</span>(View):<br>
+                &nbsp;&nbsp;<span class="fs-kw">def</span> <span class="fs-fn">get</span>(<span
+                  class="fs-kw">self</span>, request):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;students = Student.objects.all()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-kw">return</span> render(request, <span
+                  class="fs-str">'list.html'</span>,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="fs-str">'students'</span>: students})<br>
                 <br>
-                <span class="fs-kw">def</span> <span class="fs-fn">create_student</span>(request):<br>
-                &nbsp;&nbsp;<span class="fs-kw">if</span> request.method == <span class="fs-str">'POST'</span>:<br>
+                &nbsp;&nbsp;<span class="fs-kw">def</span> <span class="fs-fn">post</span>(<span
+                  class="fs-kw">self</span>, request):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;data = request.POST<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;Student.objects.create(<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name=request.POST[<span class="fs-str">'name'</span>],<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;roll=request.POST[<span class="fs-str">'roll'</span>],<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name=data[<span class="fs-str">'name'</span>],<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;roll=data[<span class="fs-str">'roll'</span>],<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cgpa=data[<span class="fs-str">'cgpa'</span>],<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dept=data[<span class="fs-str">'dept'</span>],<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year=data[<span class="fs-str">'year'</span>],<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email=data[<span class="fs-str">'email'</span>],<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;)<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-kw">return</span> JsonResponse({<span
-                  class="fs-str">'ok'</span>: <span class="fs-kw">True</span>})<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-kw">return</span> redirect(<span
+                  class="fs-str">'student-list'</span>)<br>
+                <br>
+                <span class="fs-kw">def</span> <span class="fs-fn">update_student</span>(request, pk):<br>
+                &nbsp;&nbsp;student = Student.objects.get(pk=pk)<br>
+                &nbsp;&nbsp;<span class="fs-kw">if</span> request.method == <span class="fs-str">'POST'</span>:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;student.name = request.POST[<span class="fs-str">'name'</span>]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;student.cgpa = request.POST[<span class="fs-str">'cgpa'</span>]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;student.dept = request.POST[<span class="fs-str">'dept'</span>]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;student.save()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-kw">return</span> redirect(<span
+                  class="fs-str">'student-list'</span>)<br>
+                &nbsp;&nbsp;<span class="fs-kw">return</span> render(request, <span
+                  class="fs-str">'edit.html'</span>,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;{<span class="fs-str">'student'</span>: student})<br>
+                <br>
+                <span class="fs-kw">def</span> <span class="fs-fn">delete_student</span>(request, pk):<br>
+                &nbsp;&nbsp;Student.objects.filter(pk=pk).delete()<br>
+                &nbsp;&nbsp;<span class="fs-kw">return</span> redirect(<span class="fs-str">'student-list'</span>)<br>
+                <br>
+                <span class="fs-kw">@</span><span class="fs-fn">login_required</span><br>
+                <span class="fs-kw">def</span> <span class="fs-fn">dashboard</span>(request):<br>
+                &nbsp;&nbsp;total &nbsp;= Student.objects.count()<br>
+                &nbsp;&nbsp;avg_cg = Student.objects.aggregate(<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;avg=models.Avg(<span class="fs-str">'cgpa'</span>)<br>
+                &nbsp;&nbsp;)[<span class="fs-str">'avg'</span>]<br>
+                &nbsp;&nbsp;<span class="fs-kw">return</span> render(request, <span
+                  class="fs-str">'dashboard.html'</span>, {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-str">'total'</span>: total,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-str">'avg_cgpa'</span>: round(avg_cg, <span
+                  class="fs-num">2</span>),<br>
+                &nbsp;&nbsp;})<br>
+                <br>
+                urlpatterns = [<br>
+                &nbsp;&nbsp;path(<span class="fs-str">''</span>, StudentListView.as_view(),<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;name=<span class="fs-str">'student-list'</span>),<br>
+                &nbsp;&nbsp;path(<span class="fs-str">'update/&lt;int:pk&gt;/'</span>, update_student),<br>
+                &nbsp;&nbsp;path(<span class="fs-str">'delete/&lt;int:pk&gt;/'</span>, delete_student),<br>
+                &nbsp;&nbsp;path(<span class="fs-str">'dashboard/'</span>, dashboard),<br>
+                ]<br>
               </div>
             </div>
-          </div>
-          <div class="project-card-body">
-            <span class="project-card-type">Full Stack</span>
-            <h3 class="project-card-title">Institution Management System</h3>
-            <p class="project-card-desc">A full-stack web application using Python and Django to manage student records
-              with complete CRUD functionality. Built responsive UI using HTML, CSS, Bootstrap, and JavaScript.</p>
-            <div class="project-card-tags">
-              <span>Python</span>
-              <span>Django</span>
-              <span>HTML</span>
-              <span>CSS</span>
-              <span>JavaScript</span>
+            <div class="project-card-body">
+              <span class="project-card-type">Full Stack</span>
+              <h3 class="project-card-title">Institution Management System</h3>
+              <p class="project-card-desc">A full-stack web application using Python and Django to manage student
+                records
+                with complete CRUD functionality. Built responsive UI using HTML, CSS, Bootstrap, and JavaScript.</p>
+              <div class="project-card-tags">
+                <span>Python</span>
+                <span>Django</span>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+              </div>
             </div>
-          </div>
         </a>
 
       </div>
