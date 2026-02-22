@@ -1458,15 +1458,18 @@ section {
 
 .xr-rbeam {
   position: absolute;
-  right: 49px;
+  right: 63px;
+  /* anchored at mirror's reflective face */
   top: calc(50% - 1.5px);
   height: 3px;
   width: 0;
-  background: linear-gradient(90deg, #ffba00, rgba(255, 186, 0, 0.1));
+  background: linear-gradient(to left, rgba(255, 186, 0, 0.05), #ffba00);
   box-shadow: 0 0 10px #ffba00, 0 0 20px rgba(255, 186, 0, 0.4);
   border-radius: 2px;
-  transform-origin: left center;
-  transform: rotate(-50deg);
+  transform-origin: right center;
+  /* pivot at mirror face, grow leftward-upward */
+  transform: rotate(42deg);
+  /* clockwise = left end goes upward */
 }
 
 .project-card:hover .xr-hbeam {
@@ -1483,8 +1486,10 @@ section {
   }
 
   to {
-    width: 205px;
+    width: 240px;
   }
+
+  /* extended to reach the mirror */
 }
 
 @keyframes xrBeamR {
@@ -1494,9 +1499,11 @@ section {
   }
 
   to {
-    width: 90px;
+    width: 85px;
     opacity: 1;
   }
+
+  /* grows leftward-upward from mirror */
 }
 
 /* ─── FPS Game: Gun → Bullet → Target Falls ─── */
@@ -1504,7 +1511,8 @@ section {
   position: absolute;
   left: 14px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) scaleX(-1);
+  /* flip emoji to face right */
   font-size: 2.2rem;
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.25));
 }
@@ -1573,41 +1581,41 @@ section {
 /* ─── Flap with Caution: Bird Rainbow Arc ─── */
 .flap-bird {
   position: absolute;
-  left: 5%;
-  top: 68%;
+  left: 8px;
+  top: 65%;
+  /* start near bottom-left */
   font-size: 1.8rem;
   opacity: 0;
   will-change: transform, opacity;
 }
 
 .project-card:hover .flap-bird {
-  animation: birdSoar 1.15s ease-in-out 0.1s both;
+  /* use linear so CSS handles smooth cubic interpolation between keyframes */
+  animation: birdSoar 1.3s linear 0.1s both;
 }
 
 @keyframes birdSoar {
+
+  /* 3-point parabolic arc: only transform, GPU-accelerated */
   0% {
     opacity: 0;
     transform: translate(0px, 0px);
   }
 
-  5% {
+  10% {
     opacity: 1;
-  }
-
-  25% {
-    transform: translate(75px, -65px);
+    transform: translate(25px, -30px);
   }
 
   50% {
-    transform: translate(160px, -95px);
-  }
-
-  75% {
-    transform: translate(245px, -62px);
-  }
-
-  95% {
     opacity: 1;
+    transform: translate(155px, -90px);
+  }
+
+  /* peak */
+  90% {
+    opacity: 1;
+    transform: translate(290px, -28px);
   }
 
   100% {
