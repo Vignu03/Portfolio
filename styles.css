@@ -1643,25 +1643,22 @@ section {
   z-index: 1;
 }
 
-/* ─── CSS-drawn shooting target (concentric rings, no emoji, no dart) ─── */
+/* ─── CSS-drawn shooting target ─── */
 .fps-target {
   position: absolute;
   right: 2px;
-  /* flush on the wall's front face */
   top: 50%;
-  transform: translateY(-50%);
+  /* translateY first, then rotateY so disc faces the gun (left) */
+  transform: translateY(-50%) perspective(120px) rotateY(-55deg);
   width: 52px;
   height: 52px;
   border-radius: 50%;
   background: radial-gradient(circle,
       #ffd700 0% 14%,
-      /* golden bullseye */
       #fff 14% 30%,
       #c0392b 30% 52%,
-      /* red ring */
       #fff 52% 68%,
       #222 68% 84%,
-      /* dark outer ring */
       #555 84% 92%,
       transparent 92%);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
@@ -1672,12 +1669,14 @@ section {
   position: absolute;
   left: 114px;
   /* aligns with AK-47 muzzle tip */
-  top: calc(50% - 5px);
-  width: 16px;
-  height: 9px;
-  background: radial-gradient(ellipse at 30% 50%, #fffde7 20%, #ffd700 100%);
-  border-radius: 50% 30% 30% 50%;
-  box-shadow: 0 0 10px #ffd700, 4px 0 20px rgba(255, 215, 0, 0.7);
+  top: calc(50% - 9px);
+  /* raised to barrel centre height */
+  width: 18px;
+  height: 8px;
+  background: radial-gradient(ellipse at 70% 50%, #fffde7 20%, #ffd700 100%);
+  border-radius: 30% 50% 50% 30%;
+  /* nose on the RIGHT, flat base on left */
+  box-shadow: 0 0 10px #ffd700, -4px 0 20px rgba(255, 215, 0, 0.7);
   opacity: 0;
 }
 
