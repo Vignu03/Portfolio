@@ -1424,13 +1424,30 @@ section {
 }
 
 /* ─── XR Simulation: Torch → Mirror → Deflected Ray ─── */
-.xr-torch {
+.xr-laser {
   position: absolute;
-  left: 14px;
+  left: 10px;
   top: 50%;
-  transform: translateY(-50%) rotate(90deg);
-  font-size: 2rem;
-  filter: drop-shadow(0 0 10px rgba(255, 224, 102, 0.9));
+  transform: translateY(-50%);
+  width: 30px;
+  height: 16px;
+  background: linear-gradient(90deg, #1b3a5c, #2a5a8c);
+  border-radius: 3px 8px 8px 3px;
+  border: 1.5px solid #4a9ad4;
+  box-shadow: 0 0 8px rgba(74, 154, 212, 0.4);
+}
+
+.xr-laser::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: #ffe566;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ffe566, 0 0 16px rgba(255, 229, 102, 0.8);
 }
 
 .xr-mirror {
@@ -1596,31 +1613,30 @@ section {
 
 @keyframes birdSoar {
 
-  /* 3-point parabolic arc: only transform, GPU-accelerated */
+  /* scaleX(-1) flips bird to face right, the direction it's travelling */
   0% {
     opacity: 0;
-    transform: translate(0px, 0px);
+    transform: translate(0px, 0px) scaleX(-1);
   }
 
   10% {
     opacity: 1;
-    transform: translate(25px, -30px);
+    transform: translate(25px, -30px) scaleX(-1);
   }
 
   50% {
     opacity: 1;
-    transform: translate(155px, -90px);
+    transform: translate(155px, -90px) scaleX(-1);
   }
 
-  /* peak */
   90% {
     opacity: 1;
-    transform: translate(290px, -28px);
+    transform: translate(290px, -28px) scaleX(-1);
   }
 
   100% {
     opacity: 0;
-    transform: translate(315px, 0px);
+    transform: translate(315px, 0px) scaleX(-1);
   }
 }
 
