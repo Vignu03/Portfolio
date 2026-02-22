@@ -1523,28 +1523,141 @@ section {
   /* grows leftward-upward from mirror */
 }
 
-/* ─── FPS Game: Gun → Bullet → Target Falls ─── */
-.fps-gun {
+/* ─── CSS AK-47 gun ─── */
+.fps-gun-wrap {
   position: absolute;
-  left: 14px;
+  left: 8px;
   top: 50%;
-  transform: translateY(-50%) scaleX(-1);
-  /* flip emoji to face right */
-  font-size: 2.2rem;
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.25));
+  transform: translateY(-58%);
+  width: 100px;
+  height: 38px;
+  z-index: 2;
 }
 
+/* Wooden stock */
+.fps-ak-stock {
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+  width: 24px;
+  height: 18px;
+  background: linear-gradient(160deg, #a0643a, #7a4828);
+  border-radius: 2px 0 5px 5px;
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.fps-ak-stock::before {
+  /* butt plate */
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: 0;
+  width: 4px;
+  height: 18px;
+  background: #5a3220;
+  border-radius: 2px 0 0 3px;
+}
+
+/* Main receiver body */
+.fps-ak-body {
+  position: absolute;
+  left: 22px;
+  top: 8px;
+  width: 46px;
+  height: 14px;
+  background: #232323;
+  border-radius: 2px 1px 1px 3px;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.05);
+}
+
+.fps-ak-body::after {
+  /* pistol grip */
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 13px;
+  width: 9px;
+  height: 13px;
+  background: #7a4828;
+  border-radius: 1px 1px 4px 3px;
+}
+
+/* Curved magazine */
+.fps-ak-mag {
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  width: 16px;
+  height: 15px;
+  background: #1a1a1a;
+  border-radius: 1px 1px 8px 5px;
+  transform: rotate(-6deg);
+  transform-origin: top left;
+}
+
+/* Wooden handguard above barrel */
+.fps-ak-handguard {
+  position: absolute;
+  left: 62px;
+  top: 4px;
+  width: 24px;
+  height: 5px;
+  background: linear-gradient(90deg, #8a5430, #a0643a);
+  border-radius: 1px 2px 2px 1px;
+}
+
+/* Long barrel */
+.fps-ak-barrel {
+  position: absolute;
+  left: 62px;
+  top: 10px;
+  width: 36px;
+  height: 6px;
+  background: linear-gradient(180deg, #2e2e2e, #111);
+  border-radius: 0 3px 3px 0;
+}
+
+.fps-ak-barrel::after {
+  /* muzzle break */
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: -1px;
+  width: 5px;
+  height: 8px;
+  background: #1a1a1a;
+  border-radius: 1px 2px 2px 1px;
+}
+
+/* ─── Wall ─── */
+.fps-wall {
+  position: absolute;
+  right: 30px;
+  top: 0;
+  bottom: 0;
+  width: 18px;
+  background: repeating-linear-gradient(#6b4226 0px, #6b4226 11px,
+      #4a2c18 11px, #4a2c18 13px);
+  box-shadow: inset -3px 0 8px rgba(0, 0, 0, 0.5), 3px 0 6px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+/* ─── Target on the wall ─── */
 .fps-target {
   position: absolute;
-  right: 16px;
+  right: 20px;
+  /* sits centred on the wall */
   top: 50%;
   transform: translateY(-50%);
-  font-size: 2.4rem;
+  font-size: 3rem;
+  /* bigger */
+  z-index: 2;
 }
 
 .fps-bullet {
   position: absolute;
-  left: 68px;
+  left: 114px;
+  /* aligns with AK-47 muzzle tip */
   top: calc(50% - 5px);
   width: 16px;
   height: 9px;
