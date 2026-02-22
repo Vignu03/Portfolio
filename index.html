@@ -49,8 +49,9 @@
             <span class="typing-text" id="typingText"></span>
           </p>
           <p class="hero-desc">
-            An organized, hardworking MCA student with a strong willingness to learn and improve. Focused on getting
-            better with every project and taking on new challenges to grow professionally.
+            Game development enthusiast with practical experience in Unity and gameplay programming. I enjoy designing
+            mechanics, implementing efficient systems, and turning ideas into interactive experiences. Strong interest
+            in performance optimization and scalable game architecture.
           </p>
           <div class="hero-ctas">
             <a href="#contact" class="btn btn-primary">
@@ -299,8 +300,39 @@
               <div style="font-size:3rem; margin-bottom:10px;">🏛️</div>
               <div style="font-family:var(--font-heading); font-size:1.2rem; font-weight:700;">Full Stack Web App</div>
             </div>
-            <!-- Hover: Gold-Navy theme gradient reveal -->
-            <div class="banner-scene banner-fullstack-scene"></div>
+            <!-- Hover: Python code scrolls upward -->
+            <div class="banner-scene banner-fullstack-scene">
+              <div class="fs-code-scroll">
+                <span class="fs-kw">import</span> django<br>
+                <span class="fs-kw">from</span> django.db <span class="fs-kw">import</span> models<br>
+                <span class="fs-kw">from</span> django.http <span class="fs-kw">import</span> JsonResponse<br>
+                <br>
+                <span class="fs-kw">class</span> <span class="fs-cls">Student</span>(models.Model):<br>
+                &nbsp;&nbsp;name = models.CharField(max_length=<span class="fs-num">100</span>)<br>
+                &nbsp;&nbsp;roll = models.IntegerField(unique=<span class="fs-kw">True</span>)<br>
+                &nbsp;&nbsp;cgpa = models.FloatField()<br>
+                <br>
+                &nbsp;&nbsp;<span class="fs-kw">def</span> <span class="fs-fn">__str__</span>(<span
+                  class="fs-kw">self</span>):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-kw">return</span> <span class="fs-str">f"</span><span
+                  class="fs-str">{self.name}"</span><br>
+                <br>
+                <span class="fs-kw">def</span> <span class="fs-fn">get_students</span>(request):<br>
+                &nbsp;&nbsp;qs = Student.objects.all()<br>
+                &nbsp;&nbsp;data = list(qs.values())<br>
+                &nbsp;&nbsp;<span class="fs-kw">return</span> JsonResponse({<span class="fs-str">'students'</span>:
+                data})<br>
+                <br>
+                <span class="fs-kw">def</span> <span class="fs-fn">create_student</span>(request):<br>
+                &nbsp;&nbsp;<span class="fs-kw">if</span> request.method == <span class="fs-str">'POST'</span>:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Student.objects.create(<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name=request.POST[<span class="fs-str">'name'</span>],<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;roll=request.POST[<span class="fs-str">'roll'</span>],<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="fs-kw">return</span> JsonResponse({<span
+                  class="fs-str">'ok'</span>: <span class="fs-kw">True</span>})<br>
+              </div>
+            </div>
           </div>
           <div class="project-card-body">
             <span class="project-card-type">Full Stack</span>
@@ -429,7 +461,8 @@
           <h3>Let's Work Together</h3>
           <p>I'm currently looking for opportunities to grow and contribute. If you have a role that matches my skills,
             I'd love to hear from you.</p>
-          <a href="mailto:chakralavignesh48@gmail.com" class="btn btn-gold">
+          <a href="mailto:chakralavignesh48@gmail.com?subject=Job%20Opportunity%20%7C%20Hiring%20Inquiry&body=Hi%20Vignesh%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20potential%20opportunity%20with%20you.%0A%0ALooking%20forward%20to%20hearing%20from%20you."
+            class="btn btn-gold">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />

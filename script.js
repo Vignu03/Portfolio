@@ -11,8 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'MCA Student',
             'Full Stack Developer',
             'Unity Game Developer',
-            'VR Enthusiast',
-            'Problem Solver'
+            'VR Enthusiast'
         ];
         let phraseIndex = 0;
         let charIndex = 0;
