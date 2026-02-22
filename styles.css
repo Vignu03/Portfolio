@@ -1711,21 +1711,18 @@ section {
 @keyframes fpsFall {
   0% {
     opacity: 1;
-    transform: translateY(-50%) rotate(0deg);
+    transform: translateY(-50%) perspective(120px) rotateY(-55deg) rotate(0deg);
   }
 
   20% {
     opacity: 1;
-    transform: translateY(-46%) rotate(-8deg);
+    transform: translateY(-46%) perspective(120px) rotateY(-55deg) rotate(-8deg);
   }
 
-  /* slight wobble from impact */
   100% {
     opacity: 0;
-    transform: translateY(60px) rotate(60deg);
+    transform: translateY(60px) perspective(120px) rotateY(-55deg) rotate(60deg);
   }
-
-  /* falls and disappears */
 }
 
 /* ─── Flap with Caution: Bird Rainbow Arc ─── */
