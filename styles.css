@@ -1629,10 +1629,11 @@ section {
   border-radius: 1px 2px 2px 1px;
 }
 
-/* ─── Wall ─── */
+/* ─── Wall (right corner) ─── */
 .fps-wall {
   position: absolute;
-  right: 30px;
+  right: 0;
+  /* pushed to the very right corner */
   top: 0;
   bottom: 0;
   width: 18px;
@@ -1642,15 +1643,28 @@ section {
   z-index: 1;
 }
 
-/* ─── Target on the wall ─── */
+/* ─── CSS-drawn shooting target (concentric rings, no emoji, no dart) ─── */
 .fps-target {
   position: absolute;
-  right: 20px;
-  /* sits centred on the wall */
+  right: 2px;
+  /* flush on the wall's front face */
   top: 50%;
   transform: translateY(-50%);
-  font-size: 3rem;
-  /* bigger */
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+      #ffd700 0% 14%,
+      /* golden bullseye */
+      #fff 14% 30%,
+      #c0392b 30% 52%,
+      /* red ring */
+      #fff 52% 68%,
+      #222 68% 84%,
+      /* dark outer ring */
+      #555 84% 92%,
+      transparent 92%);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
   z-index: 2;
 }
 
@@ -1681,15 +1695,18 @@ section {
     transform: translateX(0);
   }
 
-  82% {
+  88% {
     opacity: 1;
-    transform: translateX(235px);
+    transform: translateX(195px);
   }
 
+  /* stops at target */
   100% {
     opacity: 0;
-    transform: translateX(255px);
+    transform: translateX(200px);
   }
+
+  /* disappears on hit */
 }
 
 @keyframes fpsFall {
@@ -1698,14 +1715,18 @@ section {
     transform: translateY(-50%) rotate(0deg);
   }
 
-  25% {
-    transform: translateY(-44%) rotate(-12deg);
+  20% {
+    opacity: 1;
+    transform: translateY(-46%) rotate(-8deg);
   }
 
+  /* slight wobble from impact */
   100% {
     opacity: 0;
-    transform: translateY(55px) rotate(55deg);
+    transform: translateY(60px) rotate(60deg);
   }
+
+  /* falls and disappears */
 }
 
 /* ─── Flap with Caution: Bird Rainbow Arc ─── */
