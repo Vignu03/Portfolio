@@ -1418,22 +1418,23 @@ section {
    PROJECT CARD BANNER HOVER ANIMATIONS
    ════════════════════════════════════════════════ */
 
-/* ─── TIR & Dispersion: Prism splits white beam into rainbow ─── */
+/* ─── TIR & Dispersion: Prism splits white beam into rainbow fan ─── */
 .banner-tir-scene {
   background: transparent;
+  overflow: hidden;
 }
 
-/* Incoming white beam from the left */
+/* Incoming white beam from the left — grows to meet the prism's left face */
 .tir-beam-in {
   position: absolute;
-  left: 8px;
+  left: 6px;
   top: 50%;
   transform: translateY(-50%);
-  height: 4px;
+  height: 5px;
   width: 0;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), rgba(220, 220, 255, 0.7));
-  border-radius: 2px;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(230, 230, 255, 0.8));
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
   opacity: 0;
 }
 
@@ -1441,99 +1442,116 @@ section {
   animation: tirBeamIn 0.4s ease-out 0.1s both;
 }
 
-/* CSS triangular prism */
+/* Triangular prism — apex at top, base at bottom */
 .tir-prism {
   position: absolute;
-  left: 50%;
+  left: 38%;
   top: 50%;
-  transform: translate(-50%, -50%);
-  width: 0;
-  height: 0;
-  border-left: 36px solid transparent;
-  border-right: 36px solid transparent;
-  border-bottom: 62px solid rgba(140, 200, 255, 0.28);
-  filter: drop-shadow(0 0 6px rgba(140, 200, 255, 0.5));
+  transform: translate(-50%, -55%);
+  width: 58px;
+  height: 68px;
+  background: linear-gradient(160deg,
+      rgba(180, 220, 255, 0.55) 0%,
+      rgba(140, 200, 255, 0.25) 55%,
+      rgba(80, 160, 255, 0.12) 100%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  filter: drop-shadow(0 0 8px rgba(160, 215, 255, 0.55));
   opacity: 0;
-  transition: opacity 0.3s ease 0.4s;
+  transition: opacity 0.25s ease 0.45s;
 }
 
 .project-card:hover .tir-prism {
   opacity: 1;
 }
 
-/* Shared style for all outgoing spectrum rays */
+/*
+  All 7 spectrum rays share the EXACT same origin point — the prism's
+  right-face exit (~42% from left, 50% vertically). Each is rotated at
+  a different angle with transform-origin:left center so they all fan
+  outward from that single point, exactly as in a real prism dispersion.
+  Red bends least (top, negative angle), violet bends most (bottom, positive).
+*/
 .tir-ray {
   position: absolute;
-  left: calc(50% + 20px);
-  /* anchored at the prism's right exit point */
-  height: 3px;
+  left: 42%;
+  top: 50%;
+  height: 7px;
   width: 0;
-  border-radius: 2px;
+  border-radius: 0 4px 4px 0;
   opacity: 0;
   transform-origin: left center;
-  /* grow from left (prism) toward right */
 }
 
-/* Fan out vertically from the same prism exit — red bends least (top), violet most (bottom) */
+/* Rotation fan: -24° (red, least bent) → +24° (violet, most bent) */
 .tir-r {
-  top: calc(50% - 15px);
-  background: #ff3b30;
-  box-shadow: 0 0 6px #ff3b30;
+  background: #ff2200;
+  box-shadow: 0 0 8px #ff2200;
+  transform: rotate(-24deg);
 }
 
 .tir-o {
-  top: calc(50% - 9px);
-  background: #ff9500;
-  box-shadow: 0 0 6px #ff9500;
+  background: #ff8800;
+  box-shadow: 0 0 8px #ff8800;
+  transform: rotate(-15deg);
 }
 
 .tir-y {
-  top: calc(50% - 3px);
-  background: #ffcc00;
-  box-shadow: 0 0 6px #ffcc00;
+  background: #ffdd00;
+  box-shadow: 0 0 8px #ffdd00;
+  transform: rotate(-7deg);
 }
 
 .tir-g {
-  top: calc(50% + 3px);
-  background: #34c759;
-  box-shadow: 0 0 6px #34c759;
+  background: #00cc44;
+  box-shadow: 0 0 8px #00cc44;
+  transform: rotate(1deg);
 }
 
 .tir-b {
-  top: calc(50% + 9px);
-  background: #007aff;
-  box-shadow: 0 0 6px #007aff;
+  background: #0088ff;
+  box-shadow: 0 0 8px #0088ff;
+  transform: rotate(9deg);
+}
+
+.tir-i {
+  background: #4400cc;
+  box-shadow: 0 0 8px #5500ff;
+  transform: rotate(17deg);
 }
 
 .tir-v {
-  top: calc(50% + 15px);
-  background: #af52de;
-  box-shadow: 0 0 6px #af52de;
+  background: #aa00ff;
+  box-shadow: 0 0 8px #aa00ff;
+  transform: rotate(24deg);
 }
 
-/* Staggered grow animations for each ray */
+/* Staggered appearance — red first, violet last */
 .project-card:hover .tir-r {
-  animation: tirRayGrow 0.35s ease-out 0.52s both;
+  animation: tirRayGrow 0.38s ease-out 0.52s both;
 }
 
 .project-card:hover .tir-o {
-  animation: tirRayGrow 0.35s ease-out 0.58s both;
+  animation: tirRayGrow 0.38s ease-out 0.57s both;
 }
 
 .project-card:hover .tir-y {
-  animation: tirRayGrow 0.35s ease-out 0.64s both;
+  animation: tirRayGrow 0.38s ease-out 0.62s both;
 }
 
 .project-card:hover .tir-g {
-  animation: tirRayGrow 0.35s ease-out 0.70s both;
+  animation: tirRayGrow 0.38s ease-out 0.67s both;
 }
 
 .project-card:hover .tir-b {
-  animation: tirRayGrow 0.35s ease-out 0.76s both;
+  animation: tirRayGrow 0.38s ease-out 0.72s both;
+}
+
+.project-card:hover .tir-i {
+  animation: tirRayGrow 0.38s ease-out 0.77s both;
 }
 
 .project-card:hover .tir-v {
-  animation: tirRayGrow 0.35s ease-out 0.82s both;
+  animation: tirRayGrow 0.38s ease-out 0.82s both;
 }
 
 @keyframes tirBeamIn {
@@ -1544,8 +1562,10 @@ section {
 
   100% {
     opacity: 1;
-    width: calc(50% - 44px);
+    width: calc(38% - 32px);
   }
+
+  /* stops at prism left face */
 }
 
 @keyframes tirRayGrow {
@@ -1556,8 +1576,10 @@ section {
 
   100% {
     opacity: 1;
-    width: calc(50% - 44px);
+    width: 155px;
   }
+
+  /* fans out to the right edge */
 }
 
 /* --- Shared banner system --- */
