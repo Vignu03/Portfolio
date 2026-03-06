@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="TIR & Dispersion of Light — An interactive XR simulation visualising Total Internal Reflection and the dispersion of white light into its spectrum, built in Unity by Vignesh Chakrala.">
+    <title>TIR &amp; Dispersion of Light — Vignesh Chakrala</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-logo">Vignesh<span>.</span></a>
+            <div class="nav-links" id="navLinks">
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+                <a href="../index.html#skills">Skills</a>
+                <a href="../index.html#education">Education</a>
+                <a href="../index.html#contact">Contact</a>
+                <a href="../assets/Resume.pdf" download class="nav-cta">Download CV</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="container">
+            <div class="project-hero-content">
+                <a href="../index.html#projects" class="back-link">← Back to Projects</a>
+                <h1>TIR &amp; Dispersion of Light</h1>
+                <p class="section-subtitle" style="margin:0 auto;">An interactive 3D Unity XR simulation demonstrating
+                    Total Internal Reflection and the dispersion of white light into the visible spectrum —
+                    built for immersive physics education.</p>
+                <div class="project-hero-tags">
+                    <span>C#</span>
+                    <span>Unity Engine</span>
+                    <span>Unity XR</span>
+                    <span>Optics</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Details -->
+    <section class="project-detail">
+        <div class="container">
+            <div class="project-detail-grid">
+                <div>
+
+                    <!-- Overview -->
+                    <p class="project-description">
+                        Developed an interactive XR simulation that visualises two fundamental optical phenomena —
+                        Total Internal Reflection (TIR) and the Dispersion of Light. Using Unity XR Toolkit and
+                        real-time ray rendering, users can manipulate light sources, mediums, and prisms in a fully
+                        immersive 3D environment to observe how light behaves at boundaries between materials.
+                    </p>
+                    <p class="project-description">
+                        The simulation provides a hands-on environment for understanding the physics behind optical
+                        fibres, diamonds, rainbows, and prismatic effects — making abstract concepts tangible through
+                        direct interaction with VR controllers.
+                    </p>
+
+                    <!-- TIR Concept -->
+                    <div class="project-features">
+                        <h3>Total Internal Reflection (TIR)</h3>
+                        <p class="project-description" style="margin-bottom:14px;">
+                            TIR occurs when a ray of light travelling from a <strong>denser medium</strong> (e.g. glass
+                            or water) to a <strong>less dense medium</strong> (e.g. air) strikes the interface at an
+                            angle greater than the <em>critical angle</em>. Instead of refracting into the second
+                            medium, the entire ray is reflected back — resulting in perfect, lossless reflection.
+                        </p>
+                        <ul class="feature-list">
+                            <li>Critical angle determined by Snell's Law: <em>θc = arcsin(n₂ / n₁)</em>, where n₁ &gt;
+                                n₂</li>
+                            <li>Below the critical angle — light partially refracts and partially reflects</li>
+                            <li>At exactly the critical angle — refracted ray travels along the boundary (90°)</li>
+                            <li>Above the critical angle — no refraction; 100% of light is internally reflected</li>
+                            <li>Real-world applications: optical fibres, endoscopes, diamonds, periscopes, binoculars
+                            </li>
+                            <li>Simulation lets users adjust the angle of incidence and medium pair to observe TIR live
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Dispersion Concept -->
+                    <div class="project-features" style="margin-top:32px;">
+                        <h3>Dispersion of Light</h3>
+                        <p class="project-description" style="margin-bottom:14px;">
+                            Dispersion occurs because the refractive index of a medium varies with the wavelength of
+                            light. When white light passes through a prism, each colour (wavelength) bends by a
+                            different amount — separating into the visible spectrum (ROYGBIV). This is the same
+                            phenomenon responsible for rainbows.
+                        </p>
+                        <ul class="feature-list">
+                            <li>Violet light (shorter wavelength) bends most; red light (longer wavelength) bends least
+                            </li>
+                            <li>Governed by Cauchy's equation: <em>n(λ) = A + B/λ²</em></li>
+                            <li>White light splits into: Red → Orange → Yellow → Green → Blue → Indigo → Violet</li>
+                            <li>Angle of deviation depends on the prism apex angle and refractive index of glass</li>
+                            <li>Natural examples: rainbows (water droplets act as prisms), oil-film iridescence, soap
+                                bubbles</li>
+                            <li>Simulation renders each wavelength as a separate ray with accurate colour and curvature
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Key Features -->
+                    <div class="project-features" style="margin-top:32px;">
+                        <h3>Key Features</h3>
+                        <ul class="feature-list">
+                            <li>Real-time ray rendering for TIR and dispersion — angle changes update instantly</li>
+                            <li>Adjustable angle of incidence with live critical-angle threshold indicator</li>
+                            <li>Switchable medium pairs (glass-air, water-air, diamond-air) with different critical
+                                angles</li>
+                            <li>Prism mode: white beam splits into full ROYGBIV spectrum with accurate deviation angles
+                            </li>
+                            <li>XR Grab Interactables — rotate and move the prism or medium block with VR controllers
+                            </li>
+                            <li>Informational tooltips explaining the physics at each interaction point</li>
+                            <li>Designed as an educational tool for optics and physics courses</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Sidebar -->
+                <div class="project-sidebar">
+                    <div class="project-info-card">
+                        <h4>Project Info</h4>
+                        <div class="project-info-row">
+                            <span class="label">Category</span>
+                            <span class="value">XR Simulation</span>
+                        </div>
+                        <div class="project-info-row">
+                            <span class="label">Engine</span>
+                            <span class="value">Unity Engine</span>
+                        </div>
+                        <div class="project-info-row">
+                            <span class="label">Language</span>
+                            <span class="value">C#</span>
+                        </div>
+                        <div class="project-info-row">
+                            <span class="label">Platform</span>
+                            <span class="value">Unity XR (VR)</span>
+                        </div>
+                        <div class="project-info-row">
+                            <span class="label">Domain</span>
+                            <span class="value">Optics / Physics</span>
+                        </div>
+                        <div class="project-info-row">
+                            <span class="label">Purpose</span>
+                            <span class="value">Educational</span>
+                        </div>
+                        <div class="project-info-row">
+                            <span class="label">Status</span>
+                            <span class="value" style="color:#22c55e;">Completed</span>
+                        </div>
+                    </div>
+                    <div style="margin-top:24px; text-align:center;">
+                        <!-- Demo button placeholder — link to be added later -->
+                        <a href="../index.html#contact" class="btn btn-primary"
+                            style="width:100%;justify-content:center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                            Hire Me
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">© 2026 Chakrala Kartikeya Vignesh. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="https://www.linkedin.com/in/vignesh-chakrala-2079a72b9/" target="_blank"
+                        rel="noopener">LinkedIn</a>
+                    <a href="mailto:chakralavignesh48@gmail.com">Email</a>
+                    <a href="../assets/Resume.pdf" download>Resume</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>
