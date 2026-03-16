@@ -1418,6 +1418,120 @@ section {
    PROJECT CARD BANNER HOVER ANIMATIONS
    ════════════════════════════════════════════════ */
 
+/* ─── HemoDialysis Simulator: Blood flow through dialyzer ─── */
+.banner-hd-scene {
+  background: transparent;
+  overflow: hidden;
+}
+
+/* Incoming blood tube: dark red, left → dialyzer */
+.hd-tube-in {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 8px;
+  width: 0;
+  border-radius: 4px 0 0 4px;
+  background: linear-gradient(90deg, #8b0000, #cc1111);
+  box-shadow: 0 0 10px rgba(180, 0, 0, 0.6);
+  opacity: 0;
+}
+.project-card:hover .hd-tube-in {
+  animation: hdTubeIn 0.45s ease-out 0.1s both;
+}
+
+/* Dialyzer box — centre of the card */
+.hd-dialyzer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 34px;
+  height: 52px;
+  border-radius: 5px;
+  border: 2px solid rgba(0, 210, 180, 0.7);
+  background: rgba(0, 80, 70, 0.35);
+  box-shadow: 0 0 14px rgba(0, 210, 180, 0.4), inset 0 0 8px rgba(0,160,140,0.2);
+  opacity: 0;
+  transition: opacity 0.25s ease 0.52s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-card:hover .hd-dialyzer {
+  opacity: 1;
+  animation: hdDialyzerPulse 1.2s ease-in-out 0.55s infinite alternate;
+}
+
+/* Vertical stripe lines inside the dialyzer (hollow fibres) */
+.hd-dialyzer-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent          0px,
+    transparent          4px,
+    rgba(0,210,180,0.25) 4px,
+    rgba(0,210,180,0.25) 5px
+  );
+}
+
+/* Outgoing clean-blood tube: lighter rose/pink, dialyzer → right */
+.hd-tube-out {
+  position: absolute;
+  left: calc(50% + 18px);
+  top: 50%;
+  transform: translateY(-50%);
+  height: 8px;
+  width: 0;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(90deg, #e05050, #ff8888);
+  box-shadow: 0 0 10px rgba(220, 80, 80, 0.5);
+  opacity: 0;
+}
+.project-card:hover .hd-tube-out {
+  animation: hdTubeOut 0.45s ease-out 0.75s both;
+}
+
+/* Waste droplets — fall from the dialyzer bottom */
+.hd-waste {
+  position: absolute;
+  left: calc(50% - 4px);
+  width: 8px;
+  height: 8px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: radial-gradient(circle at 40% 35%, #ffcc00, #ff8800);
+  box-shadow: 0 0 6px rgba(255, 140, 0, 0.7);
+  opacity: 0;
+}
+.hd-w1 { top: calc(50% + 26px); }
+.hd-w2 { top: calc(50% + 26px); left: calc(50% + 6px); }
+.hd-w3 { top: calc(50% + 26px); left: calc(50% - 14px); }
+
+.project-card:hover .hd-w1 { animation: hdWasteDrop 0.5s ease-in 0.85s both; }
+.project-card:hover .hd-w2 { animation: hdWasteDrop 0.5s ease-in 1.00s both; }
+.project-card:hover .hd-w3 { animation: hdWasteDrop 0.5s ease-in 1.15s both; }
+
+@keyframes hdTubeIn {
+  0%   { opacity: 1; width: 0; }
+  100% { opacity: 1; width: calc(50% - 22px); }
+}
+@keyframes hdTubeOut {
+  0%   { opacity: 1; width: 0; }
+  100% { opacity: 1; width: calc(50% - 22px); }
+}
+@keyframes hdDialyzerPulse {
+  0%   { box-shadow: 0 0 14px rgba(0,210,180,0.4), inset 0 0 8px rgba(0,160,140,0.2); }
+  100% { box-shadow: 0 0 22px rgba(0,210,180,0.75), inset 0 0 14px rgba(0,210,180,0.35); }
+}
+@keyframes hdWasteDrop {
+  0%   { opacity: 1; transform: translateY(0);   }
+  60%  { opacity: 1; transform: translateY(22px); }
+  100% { opacity: 0; transform: translateY(32px); }
+}
+
 /* ─── TIR & Dispersion: Prism splits white beam into rainbow fan ─── */
 .banner-tir-scene {
   background: transparent;

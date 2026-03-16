@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="HemoDialysis Simulator — An immersive XR simulation for understanding and training the hemodialysis procedure, built in Unity by Vignesh Chakrala.">
+    <title>HemoDialysis Simulator — Vignesh Chakrala</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-logo">Vignesh<span>.</span></a>
+            <div class="nav-links" id="navLinks">
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+                <a href="../index.html#skills">Skills</a>
+                <a href="../index.html#education">Education</a>
+                <a href="../index.html#contact">Contact</a>
+                <a href="../assets/Resume.pdf" download class="nav-cta">Download CV</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="container">
+            <div class="project-hero-content">
+                <a href="../index.html#projects" class="back-link">← Back to Projects</a>
+                <h1>HemoDialysis Simulator</h1>
+                <p class="section-subtitle" style="margin:0 auto;">An immersive XR simulation that replicates the
+                    hemodialysis procedure in a fully interactive 3D environment — designed for medical education,
+                    clinical training, and patient awareness.</p>
+                <div class="project-hero-tags">
+                    <span>C#</span>
+                    <span>Unity Engine</span>
+                    <span>Unity XR</span>
+                    <span>Medical Simulation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Details -->
+    <section class="project-detail">
+        <div class="container">
+            <div class="project-detail-grid">
+                <div>
+
+                    <!-- Overview -->
+                    <p class="project-description">
+                        Developed a comprehensive XR simulation of the hemodialysis procedure — a life-sustaining
+                        treatment used when the kidneys can no longer filter waste and excess fluid from the blood.
+                        The simulation allows users to walk through every step of the dialysis process in an
+                        immersive VR environment, providing a safe, repeatable learning experience for medical
+                        students and nursing staff.
+                    </p>
+                    <p class="project-description">
+                        The simulator accurately models blood circuit setup, dialyzer function, fluid removal,
+                        and alarm responses. Using Unity XR Toolkit, users interact with real dialysis machine
+                        components via VR controllers — building procedural muscle memory without risk to real patients.
+                    </p>
+
+                    <!-- What is Hemodialysis -->
+                    <div class="project-features">
+                        <h3>What is Hemodialysis?</h3>
+                        <p class="project-description" style="margin-bottom:14px;">
+                            Hemodialysis is a medical procedure performed when the kidneys fail to adequately remove
+                            waste products (urea, creatinine), excess water, and harmful toxins from the blood.
+                            A dialysis machine acts as an <strong>artificial kidney</strong> — blood is drawn from the
+                            patient's body, passed through a <em>dialyzer</em> (semi-permeable membrane filter), and
+                            returned cleaned. Sessions typically last 3–5 hours and occur 3 times per week.
+                        </p>
+                        <ul class="feature-list">
+                            <li>Blood is accessed via an arteriovenous (AV) fistula, graft, or central venous catheter</li>
+                            <li>A blood pump drives blood through the extracorporeal (outside the body) circuit</li>
+                            <li>The <em>dialyzer</em> contains thousands of hollow semi-permeable fibres — waste diffuses out across the membrane into the dialysate solution</li>
+                            <li>Dialysate flows counter-current to blood to maximise diffusion gradient efficiency</li>
+                            <li>Ultrafiltration removes excess fluid by applying controlled transmembrane pressure</li>
+                            <li>Anticoagulants (e.g. heparin) prevent blood clotting in the circuit</li>
+                            <li>Air detectors and pressure monitors ensure patient safety throughout the session</li>
+                        </ul>
+                    </div>
+
+                    <!-- Simulation Details -->
+                    <div class="project-features" style="margin-top:32px;">
+                        <h3>How the Simulation Works</h3>
+                        <p class="project-description" style="margin-bottom:14px;">
+                            The XR simulator guides users through a structured, step-by-step hemodialysis session.
+                            Each phase is interactive — users must correctly perform actions in sequence, mimicking
+                            real clinical protocols. Incorrect steps trigger educational feedback, not failure states,
+                            reinforcing learning rather than penalising mistakes.
+                        </p>
+                        <ul class="feature-list">
+                            <li><strong>Machine Setup:</strong> Prime the blood tubing set, connect dialyzer, and configure dialysate flow rate</li>
+                            <li><strong>Patient Connection:</strong> Needle insertion (AV fistula simulation), blood line connection, and heparin bolus administration</li>
+                            <li><strong>Session Monitoring:</strong> Real-time blood pressure, venous/arterial pressure alarms, and fluid balance tracking</li>
+                            <li><strong>Troubleshooting Mode:</strong> Respond to common alarms — access infiltration, air-in-line detection, low blood pressure events</li>
+                            <li><strong>Disconnection Protocol:</strong> Safely return blood to patient, remove needles, apply haemostasis</li>
+                        </ul>
+                    </div>
+
+                    <!-- Key Features -->
+                    <div class="project-features" style="margin-top:32px;">
+                        <h3>Key Features</h3>
+                        <ul class="feature-list">
+                            <li>Step-by-step guided hemodialysis procedure with interactive VR component handling</li>
+                            <li>Accurate 3D models of dialysis machine, dialyzer, blood tubing sets, and access sites</li>
+                            <li>Real-time blood flow simulation with dynamic pressure and flow-rate visualisation</li>
+                            <li>Alarm simulation module for hands-on clinical troubleshooting practice</li>
+                            <li>Patient safety feedback — warnings for incorrect sequencing or unsafe actions</li>
+                            <li>XR Grab Interactables for manipulating machine knobs, clamps, and tubing connectors</li>
+                            <li>Designed for medical colleges, nursing schools, and nephrology training centres</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Sidebar -->
+                <div class="project-sidebar">
+                    <div class="project-info-card">
+                        <h4>Project Info</h4>
+                        <div class="project-info-row">
+                            <span class="label">Category</span>
+                            <span class="value">XR Simulation</span>
+                        </div>
+                        <div class="project-info-row">
+                            <span class="label">Engine</span>
+                            <span class="value">Unity Engine</span>
+                        </div>
+                        <div class="project-info-row">
+                            <span class="label">Language</span>
+                            <span class="value">C#</span>
+                        </div>
+                        <div class="project-info-row">
+                            <span class="label">Platform</span>
+                            <span class="value">Unity XR (VR)</span>
+                        </div>
+                        <div class="project-info-row">
+                            <span class="label">Domain</span>
+                            <span class="value">Medical / Healthcare</span>
+                        </div>
+                        <div class="project-info-row">
+                            <span class="label">Purpose</span>
+                            <span class="value">Clinical Training</span>
+                        </div>
+                        <div class="project-info-row">
+                            <span class="label">Status</span>
+                            <span class="value" style="color:#22c55e;">Completed</span>
+                        </div>
+                    </div>
+                    <div style="margin-top:24px; text-align:center;">
+                        <!-- Demo button — link to be added -->
+                        <a href="../index.html#contact" class="btn btn-primary"
+                            style="width:100%;justify-content:center;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                            Hire Me
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">© 2026 Chakrala Kartikeya Vignesh. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="https://www.linkedin.com/in/vignesh-chakrala-2079a72b9/" target="_blank"
+                        rel="noopener">LinkedIn</a>
+                    <a href="mailto:chakralavignesh48@gmail.com">Email</a>
+                    <a href="../assets/Resume.pdf" download>Resume</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>
