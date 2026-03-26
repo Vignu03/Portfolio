@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const typingElement = document.getElementById('typingText');
     if (typingElement) {
         const phrases = [
-            'MCA Student',
             'Full Stack Developer',
             'Unity Game Developer',
             'VR Enthusiast'
