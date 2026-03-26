@@ -1418,6 +1418,91 @@ section {
    PROJECT CARD BANNER HOVER ANIMATIONS
    ════════════════════════════════════════════════ */
 
+/* ─── Overdrive Racing: Car zooms with speed lines ─── */
+.banner-race-scene {
+  background: transparent;
+  overflow: hidden;
+}
+
+/* Road strip running horizontally through the centre */
+.race-road {
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 28px;
+  background: rgba(30, 30, 40, 0.6);
+  border-top: 2px solid rgba(255,255,255,0.08);
+  border-bottom: 2px solid rgba(255,255,255,0.08);
+  opacity: 0;
+  transition: opacity 0.2s ease 0.05s;
+}
+.project-card:hover .race-road { opacity: 1; }
+
+/* Speed streak lines — white dashes shooting across */
+.race-line {
+  position: absolute;
+  top: 50%;
+  height: 3px;
+  width: 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
+  opacity: 0;
+  transform-origin: left center;
+}
+.race-l1 { transform: translateY(-8px);  }
+.race-l2 { transform: translateY(-1px);  }
+.race-l3 { transform: translateY( 6px);  }
+
+.project-card:hover .race-l1 { animation: raceStreak 0.45s ease-out 0.1s both; }
+.project-card:hover .race-l2 { animation: raceStreak 0.45s ease-out 0.2s both; }
+.project-card:hover .race-l3 { animation: raceStreak 0.45s ease-out 0.3s both; }
+
+/* Racing car — zooms in from left */
+.race-car {
+  position: absolute;
+  left: -48px;
+  top: 50%;
+  transform: translateY(-55%);
+  font-size: 2rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(80, 160, 255, 0.7));
+  opacity: 0;
+}
+.project-card:hover .race-car {
+  animation: raceCarZoom 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.35s both;
+}
+
+/* Checkered flag — pops in at the right */
+.race-flag {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-58%);
+  font-size: 2rem;
+  line-height: 1;
+  opacity: 0;
+}
+.project-card:hover .race-flag {
+  animation: raceFlagPop 0.3s ease-out 0.95s both;
+}
+
+@keyframes raceStreak {
+  0%   { opacity: 0; width: 0;    left: 0; }
+  20%  { opacity: 1; }
+  100% { opacity: 0; width: 100%; left: 0; }
+}
+@keyframes raceCarZoom {
+  0%   { opacity: 0; left: -48px; }
+  10%  { opacity: 1; }
+  100% { opacity: 1; left: calc(100% - 90px); }
+}
+@keyframes raceFlagPop {
+  0%   { opacity: 0; transform: translateY(-58%) scale(0.5); }
+  60%  { transform: translateY(-58%) scale(1.2); }
+  100% { opacity: 1; transform: translateY(-58%) scale(1); }
+}
+
 /* ─── HemoDialysis Simulator: Blood flow through dialyzer ─── */
 .banner-hd-scene {
   background: transparent;
