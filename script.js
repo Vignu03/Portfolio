@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const typingElement = document.getElementById('typingText');
     if (typingElement) {
         const phrases = [
-            'Full Stack Developer',
             'Unity Game Developer',
-            'VR Enthusiast'
+            'VR Enthusiast',
+            'Full Stack Developer'
         ];
         let phraseIndex = 0;
         let charIndex = 0;
