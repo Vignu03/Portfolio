@@ -1418,89 +1418,164 @@ section {
    PROJECT CARD BANNER HOVER ANIMATIONS
    ════════════════════════════════════════════════ */
 
-/* ─── Overdrive Racing: Car zooms with speed lines ─── */
+/* ─── Overdrive Racing: CSS RPM Speedometer gauge ─── */
 .banner-race-scene {
   background: transparent;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Road strip running horizontally through the centre */
-.race-road {
+/* Outer wrapper — clips circle to upper semicircle only */
+.race-dial-wrap {
   position: absolute;
-  left: 0; right: 0;
+  width: 150px;
+  height: 82px;          /* exactly half the circle height */
+  overflow: hidden;
   top: 50%;
-  transform: translateY(-50%);
-  height: 28px;
-  background: rgba(30, 30, 40, 0.6);
-  border-top: 2px solid rgba(255,255,255,0.08);
-  border-bottom: 2px solid rgba(255,255,255,0.08);
+  left: 50%;
+  transform: translate(-50%, -8%);
+}
+
+/* Full-circle outer ring (bottom half hidden by wrapper overflow) */
+.race-dial-ring {
+  position: absolute;
+  width: 146px;
+  height: 146px;
+  border-radius: 50%;
+  border: 3px solid rgba(80, 160, 255, 0.35);
+  box-shadow: 0 0 18px rgba(80, 160, 255, 0.2), inset 0 0 30px rgba(0, 0, 30, 0.6);
+  background: radial-gradient(circle at center, rgba(5, 10, 25, 0.95) 0%, rgba(10, 20, 50, 0.85) 100%);
+  top: 0; left: 2px;
   opacity: 0;
-  transition: opacity 0.2s ease 0.05s;
+  transition: opacity 0.25s ease 0.05s;
 }
-.project-card:hover .race-road { opacity: 1; }
+.project-card:hover .race-dial-ring { opacity: 1; }
 
-/* Speed streak lines — white dashes shooting across */
-.race-line {
+/* Coloured arc: green → yellow → red (painted as background on a ring) */
+.race-dial-arc {
   position: absolute;
-  top: 50%;
-  height: 3px;
-  width: 0;
+  width: 118px;
+  height: 118px;
+  border-radius: 50%;
+  top: 14px; left: 16px;
+  background: conic-gradient(
+    from 185deg,
+    #22c55e  0deg  55deg,
+    #facc15  55deg 105deg,
+    #ef4444  105deg 175deg,
+    transparent 175deg
+  );
+  -webkit-mask: radial-gradient(circle at center, transparent 44px, black 45px);
+  mask:          radial-gradient(circle at center, transparent 44px, black 45px);
+  opacity: 0;
+  transition: opacity 0.3s ease 0.15s;
+}
+.project-card:hover .race-dial-arc { opacity: 1; }
+
+/* Tick marks — 5 evenly spaced, rotated around the dial center */
+.race-tick {
+  position: absolute;
+  width: 3px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.55);
   border-radius: 2px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
+  /* All ticks pivot from the dial center: (75px, 73px) */
+  left: 74px;
+  top: 14px;
+  transform-origin: center 59px;   /* 59px = 73px center - 14px top position */
   opacity: 0;
-  transform-origin: left center;
+  transition: opacity 0.2s ease 0.2s;
 }
-.race-l1 { transform: translateY(-8px);  }
-.race-l2 { transform: translateY(-1px);  }
-.race-l3 { transform: translateY( 6px);  }
+.project-card:hover .race-tick { opacity: 1; }
+/* Spread ticks across the arc (-85° → +85°) */
+.race-t1 { transform: rotate(-85deg); }
+.race-t2 { transform: rotate(-42deg); }
+.race-t3 { transform: rotate(  0deg); }
+.race-t4 { transform: rotate( 42deg); }
+.race-t5 { transform: rotate( 85deg); background: rgba(239, 68, 68, 0.8); } /* redline tick */
 
-.project-card:hover .race-l1 { animation: raceStreak 0.45s ease-out 0.1s both; }
-.project-card:hover .race-l2 { animation: raceStreak 0.45s ease-out 0.2s both; }
-.project-card:hover .race-l3 { animation: raceStreak 0.45s ease-out 0.3s both; }
-
-/* Racing car — zooms in from left */
-.race-car {
+/* Needle wrapper — pivots from dial centre (75px, 73px) */
+.race-needle-wrap {
   position: absolute;
-  left: -48px;
-  top: 50%;
-  transform: translateY(-55%);
-  font-size: 2rem;
-  line-height: 1;
-  filter: drop-shadow(0 0 8px rgba(80, 160, 255, 0.7));
+  left: 75px;
+  top: 73px;
+  width: 0;
+  height: 0;
+  transform: rotate(-90deg);   /* start position: far left = 0 RPM */
+  transform-origin: center center;
   opacity: 0;
+  transition: opacity 0.1s ease 0.3s;
 }
-.project-card:hover .race-car {
-  animation: raceCarZoom 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.35s both;
+.project-card:hover .race-needle-wrap {
+  opacity: 1;
+  animation: needleSweep 1.1s cubic-bezier(0.33, 1, 0.68, 1) 0.3s both;
 }
 
-/* Checkered flag — pops in at the right */
-.race-flag {
+/* The needle itself — extends upward from wrap origin */
+.race-needle {
   position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-58%);
-  font-size: 2rem;
-  line-height: 1;
-  opacity: 0;
-}
-.project-card:hover .race-flag {
-  animation: raceFlagPop 0.3s ease-out 0.95s both;
+  width: 3px;
+  height: 52px;
+  background: linear-gradient(180deg, #ff4444 0%, #ff8800 60%, rgba(255,100,0,0.3) 100%);
+  border-radius: 2px 2px 0 0;
+  bottom: 0;
+  left: -1px;
+  box-shadow: 0 0 8px rgba(255, 80, 0, 0.8);
 }
 
-@keyframes raceStreak {
-  0%   { opacity: 0; width: 0;    left: 0; }
-  20%  { opacity: 1; }
-  100% { opacity: 0; width: 100%; left: 0; }
+/* Needle pivot cap */
+.race-needle-wrap::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ff8800, #ff4444);
+  top: -5px; left: -5px;
+  box-shadow: 0 0 8px rgba(255, 100, 0, 0.7);
 }
-@keyframes raceCarZoom {
-  0%   { opacity: 0; left: -48px; }
-  10%  { opacity: 1; }
-  100% { opacity: 1; left: calc(100% - 90px); }
+
+/* RPM label at the bottom centre of the dial */
+.race-dial-label {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: rgba(80, 160, 255, 0.7);
+  font-family: 'Courier New', monospace;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.4s;
 }
-@keyframes raceFlagPop {
-  0%   { opacity: 0; transform: translateY(-58%) scale(0.5); }
-  60%  { transform: translateY(-58%) scale(1.2); }
-  100% { opacity: 1; transform: translateY(-58%) scale(1); }
+.project-card:hover .race-dial-label { opacity: 1; }
+
+/* Redline zone glow at far right of arc */
+.race-dial-redline {
+  position: absolute;
+  width: 8px;
+  height: 22px;
+  background: linear-gradient(180deg, #ef4444, transparent);
+  border-radius: 4px;
+  top: 18px;
+  right: 12px;
+  transform: rotate(5deg);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+  opacity: 0;
+  transition: opacity 0.4s ease 1.1s;
+}
+.project-card:hover .race-dial-redline { opacity: 1; }
+
+/* Needle sweep: 0 RPM (−90°) → past redline (+95°) → settles at redline (+82°) */
+@keyframes needleSweep {
+  0%   { transform: rotate(-90deg); }
+  65%  { transform: rotate(100deg); }   /* overshoot into red */
+  80%  { transform: rotate( 72deg); }   /* bounce back */
+  90%  { transform: rotate( 90deg); }   /* settle at redline */
+  100% { transform: rotate( 85deg); }
 }
 
 /* ─── HemoDialysis Simulator: Blood flow through dialyzer ─── */
