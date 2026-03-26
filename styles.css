@@ -1418,13 +1418,219 @@ section {
    PROJECT CARD BANNER HOVER ANIMATIONS
    ════════════════════════════════════════════════ */
 
-/* ─── Overdrive Racing: CSS RPM Speedometer gauge ─── */
+/* ─── Overdrive Racing: Racetrack + CSS car + mini speedometer ─── */
 .banner-race-scene {
   background: transparent;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+
+/* ── Road ── */
+.race-road {
+  position: absolute;
+  left: 0; right: 0;
+  top: 38%; height: 46px;
+  background: #0f1117;
+  border-top: 2px solid #374151;
+  border-bottom: 2px solid #374151;
+  opacity: 0;
+  transition: opacity 0.2s ease 0.05s;
+}
+.race-road::before {                         /* dashed yellow centre line */
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%; transform: translateY(-50%);
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(250,204,21,0.8) 0px,  rgba(250,204,21,0.8) 18px,
+    transparent          18px,  transparent          32px
+  );
+}
+.project-card:hover .race-road { opacity: 1; }
+
+/* ── Wind / speed streaks — appear when car is mid-track ── */
+.race-wind {
+  position: absolute;
+  height: 2px; width: 42px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), rgba(255,255,255,0.2));
+  opacity: 0;
+}
+.rw1 { top: calc(38% + 10px); left: 58%; }
+.rw2 { top: calc(38% + 22px); left: 52%; }
+.rw3 { top: calc(38% + 33px); left: 60%; }
+.project-card:hover .rw1 { animation: windStreak 0.38s ease-out 0.80s both; }
+.project-card:hover .rw2 { animation: windStreak 0.38s ease-out 0.92s both; }
+.project-card:hover .rw3 { animation: windStreak 0.38s ease-out 1.04s both; }
+
+/* ── Checkered finish flag ── */
+.race-finish-flag {
+  position: absolute;
+  right: 20px;
+  top: calc(38% - 10px);
+  height: 66px; width: 10px;
+  background: repeating-conic-gradient(#fff 0% 25%, #111 0% 50%) 0 0 / 5px 5px;
+  border-radius: 1px;
+  box-shadow: 0 0 8px rgba(255,255,255,0.25);
+  opacity: 0;
+  transition: opacity 0.25s ease 0.1s;
+}
+.project-card:hover .race-finish-flag { opacity: 1; }
+
+/* ── CSS car wrapper — moves left → finish line (ease-in = accelerating) ── */
+.race-car-wrap {
+  position: absolute;
+  width: 54px; height: 30px;
+  left: -62px;
+  top: calc(38% + 6px);
+  opacity: 0;
+}
+.project-card:hover .race-car-wrap {
+  opacity: 1;
+  animation: raceCarDrive 1.5s ease-in 0.1s both;
+}
+
+/* Car body — blue, tapered front-right = facing right */
+.race-car-shell {
+  position: absolute;
+  width: 54px; height: 15px;
+  background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
+  border-radius: 2px 10px 2px 2px;     /* right side (front) more rounded */
+  top: 8px; left: 0;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.6);
+}
+.race-car-shell::after {                /* hood accent stripe */
+  content: '';
+  position: absolute;
+  right: 5px; top: 3px;
+  width: 13px; height: 7px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 1px 5px 1px 1px;
+}
+
+/* Cabin/roof — shifted rightward (toward front) */
+.race-car-roof {
+  position: absolute;
+  width: 22px; height: 13px;
+  background: linear-gradient(180deg, #93c5fd, #60a5fa);
+  border-radius: 5px 5px 0 0;
+  top: 0; left: 18px;                  /* closer to front-right */
+}
+.race-car-roof::after {                /* windshield tint */
+  content: '';
+  position: absolute;
+  right: 2px; top: 2px;
+  width: 8px; height: 9px;
+  background: rgba(20,50,110,0.55);
+  border-radius: 2px 3px 0 0;
+}
+
+/* Front wheel (right side of car = front) */
+.race-car-wf {
+  position: absolute;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #111827;
+  border: 2px solid #4b5563;
+  bottom: 0; right: 5px;
+}
+.race-car-wf::after { content:''; position:absolute; width:5px;height:5px;border-radius:50%;background:#6b7280;top:50%;left:50%;transform:translate(-50%,-50%); }
+
+/* Rear wheel (left side of car = rear) */
+.race-car-wr {
+  position: absolute;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #111827;
+  border: 2px solid #4b5563;
+  bottom: 0; left: 5px;
+}
+.race-car-wr::after { content:''; position:absolute; width:5px;height:5px;border-radius:50%;background:#6b7280;top:50%;left:50%;transform:translate(-50%,-50%); }
+
+/* ── Mini speedometer — bottom left ── */
+.race-mini-speedo {
+  position: absolute;
+  bottom: 5px; left: 8px;
+  width: 52px; height: 30px;
+  overflow: hidden;                    /* clips to semicircle */
+}
+.race-mini-ring {
+  position: absolute;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 2px solid rgba(80,160,255,0.5);
+  background: radial-gradient(circle, rgba(5,10,25,0.97), rgba(10,20,50,0.88));
+  box-shadow: 0 0 10px rgba(80,160,255,0.2);
+  top: 0; left: 2px;
+  opacity: 0;
+  transition: opacity 0.25s ease 0.1s;
+}
+.project-card:hover .race-mini-ring { opacity: 1; }
+
+.race-mini-arc {
+  position: absolute;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  top: 5px; left: 7px;
+  background: conic-gradient(
+    from 185deg,
+    #22c55e  0deg  55deg,
+    #facc15  55deg 105deg,
+    #ef4444  105deg 175deg,
+    transparent 175deg
+  );
+  -webkit-mask: radial-gradient(circle at center, transparent 12px, black 13px);
+  mask:          radial-gradient(circle at center, transparent 12px, black 13px);
+  opacity: 0;
+  transition: opacity 0.3s ease 0.15s;
+}
+.project-card:hover .race-mini-arc { opacity: 1; }
+
+/* Mini needle — SAME ease-in + 1.5s as car so they sync perfectly */
+.race-mini-nwrap {
+  position: absolute;
+  left: 26px; top: 24px;            /* centre of 52x48 ring */
+  width: 0; height: 0;
+  transform: rotate(-85deg);         /* start = 0 RPM */
+  transform-origin: center center;
+  opacity: 0;
+  transition: opacity 0.1s ease 0.15s;
+}
+.project-card:hover .race-mini-nwrap {
+  opacity: 1;
+  animation: miniNeedleSweep 1.5s ease-in 0.1s both; /* ← same timing as car */
+}
+.race-mini-needle {
+  position: absolute;
+  width: 2px; height: 17px;
+  background: linear-gradient(180deg, #ff4444, #ff8800 70%, transparent);
+  border-radius: 1px;
+  bottom: 0; left: -1px;
+  box-shadow: 0 0 5px rgba(255,80,0,0.8);
+}
+.race-mini-nwrap::after {
+  content: '';
+  position: absolute;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ff8800, #ff4444);
+  top: -3px; left: -3px;
+  box-shadow: 0 0 5px rgba(255,100,0,0.7);
+}
+
+/* ── Keyframes ── */
+@keyframes raceCarDrive {
+  0%   { left: -62px; }
+  100% { left: calc(100% - 84px); }   /* stops just before finish flag */
+}
+@keyframes miniNeedleSweep {
+  0%   { transform: rotate(-85deg); }  /* 0 RPM */
+  100% { transform: rotate( 82deg); }  /* redline */
+}
+@keyframes windStreak {
+  0%   { opacity: 0.8; transform: translateX( 0); }
+  100% { opacity: 0;   transform: translateX(-70px); }
 }
 
 /* Outer wrapper — clips circle to upper semicircle only */
