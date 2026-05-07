@@ -152,4 +152,106 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+    // ─── This Is Blast — interactive banner grid ───
+    (function initBlastBanner() {
+        const card = document.getElementById('blastCard');
+        const grid = document.getElementById('blastGrid');
+        if (!card || !grid) return;
+
+        const COLS = 10, ROWS = 3;
+        const COLORS = ['#ef4444', '#3b82f6', '#22c55e', '#f97316']; // red blue green orange
+
+        // cols[c] = array of colors, index 0 = bottom, top = last index
+        let cols = [];
+        let cellEls = [];
+        let simInterval = null;
+        let busy = false;
+
+        // Build fixed DOM of 30 cells (row-major: row0=top)
+        for (let r = 0; r < ROWS; r++) {
+            for (let c = 0; c < COLS; c++) {
+                const div = document.createElement('div');
+                div.className = 'blast-cell';
+                grid.appendChild(div);
+                cellEls.push(div);
+            }
+        }
+
+        function rndColor() { return COLORS[Math.floor(Math.random() * COLORS.length)]; }
+
+        function fillCols() {
+            cols = Array.from({ length: COLS }, () =>
+                Array.from({ length: ROWS }, rndColor)
+            );
+        }
+
+        // Sync data → DOM (no transition override — CSS handles it)
+        function syncUI() {
+            for (let r = 0; r < ROWS; r++) {
+                for (let c = 0; c < COLS; c++) {
+                    const el = cellEls[r * COLS + c];
+                    // visual top row r=0 → data index ROWS-1 (top of column)
+                    const di = ROWS - 1 - r;
+                    const color = di < cols[c].length ? cols[c][di] : null;
+                    el.style.background = color || 'transparent';
+                    el.style.opacity   = color ? '1' : '0';
+                    el.style.transform = color ? 'scale(1)' : 'scale(0)';
+                }
+            }
+        }
+
+        function popRandom() {
+            if (busy) return;
+            // Collect all non-empty positions
+            const avail = [];
+            for (let c = 0; c < COLS; c++)
+                for (let i = 0; i < cols[c].length; i++)
+                    avail.push({ c, i });
+
+            if (avail.length === 0) { fillCols(); syncUI(); return; }
+
+            const { c, i } = avail[Math.floor(Math.random() * avail.length)];
+            // Visual row of data-index i: bottom-aligned
+            const vr = ROWS - 1 - i + (ROWS - cols[c].length);
+            // clamp to valid row
+            const visualRow = Math.max(0, Math.min(ROWS - 1, vr));
+            const el = cellEls[visualRow * COLS + c];
+
+            busy = true;
+            // 1. Pop animation on the chosen cell
+            el.style.transition = 'transform 0.14s ease, opacity 0.14s ease';
+            el.style.transform = 'scale(0)';
+            el.style.opacity = '0';
+
+            setTimeout(() => {
+                // 2. Remove from data (gravity auto-applies via bottom-alignment)
+                cols[c].splice(i, 1);
+                // 3. Re-sync with smooth fall
+                cellEls.forEach(e => {
+                    e.style.transition = 'background 0.12s ease, opacity 0.15s ease, transform 0.15s ease';
+                });
+                syncUI();
+                busy = false;
+            }, 150);
+        }
+
+        card.addEventListener('mouseenter', () => {
+            fillCols();
+            syncUI();
+            simInterval = setInterval(popRandom, 280);
+        });
+
+        card.addEventListener('mouseleave', () => {
+            clearInterval(simInterval);
+            simInterval = null;
+            busy = false;
+            cellEls.forEach(el => {
+                el.style.transition = 'transform 0.2s ease, opacity 0.2s ease';
+                el.style.opacity = '0';
+                el.style.transform = 'scale(0)';
+            });
+            setTimeout(() => { cols = []; }, 220);
+        });
+    })();
+
 });
