@@ -870,6 +870,9 @@ section {
 
 .project-card-body {
   padding: 24px 28px 28px;
+  height: 230px;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card-type {
@@ -905,6 +908,7 @@ section {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  margin-top: auto;
 }
 
 .project-card-tags span {
