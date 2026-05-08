@@ -775,6 +775,28 @@ section {
   background: var(--white);
 }
 
+.projects-category-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-top: 20px;
+  margin-bottom: -16px;
+  position: relative;
+  display: inline-block;
+}
+
+.projects-category-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+  border-radius: 2px;
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -1418,6 +1440,22 @@ section {
    PROJECT CARD BANNER HOVER ANIMATIONS
    ════════════════════════════════════════════════ */
 
+/* ─── Project Category Headings ─── */
+.projects-category {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 48px 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(139, 92, 246, 0.25);
+  letter-spacing: 0.02em;
+}
+
+.projects-category:first-of-type {
+  margin-top: 36px;
+}
+
 /* ─── Red Runner: 2D side-scroller with red character ─── */
 .banner-rr-scene {
   background: transparent;
@@ -1427,90 +1465,163 @@ section {
 /* Ground */
 .rr-ground {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: 18px;
   background: linear-gradient(180deg, #4a2020, #2d1212);
-  border-top: 2px solid rgba(239,68,68,0.35);
+  border-top: 2px solid rgba(239, 68, 68, 0.35);
 }
 
 /* Obstacles — red spikes sliding from right to left */
 .rr-obs {
   position: absolute;
   bottom: 18px;
-  width: 0; height: 0;
+  width: 0;
+  height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   border-bottom: 18px solid #ef4444;
-  filter: drop-shadow(0 0 4px rgba(239,68,68,0.5));
+  filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.5));
   opacity: 0;
 }
-.project-card:hover .rr-obs { opacity: 1; }
-.project-card:hover .rr-o1 { animation: rrObsSlide 1.8s linear 0.2s infinite; }
-.project-card:hover .rr-o2 { animation: rrObsSlide 1.8s linear 0.8s infinite; }
-.project-card:hover .rr-o3 { animation: rrObsSlide 1.8s linear 1.4s infinite; }
+
+.project-card:hover .rr-obs {
+  opacity: 1;
+}
+
+.project-card:hover .rr-o1 {
+  animation: rrObsSlide 1.8s linear 0.2s infinite;
+}
+
+.project-card:hover .rr-o2 {
+  animation: rrObsSlide 1.8s linear 0.8s infinite;
+}
+
+.project-card:hover .rr-o3 {
+  animation: rrObsSlide 1.8s linear 1.4s infinite;
+}
 
 /* Character — red body, stays at left, jumps on loop */
 .rr-char {
   position: absolute;
-  width: 10px; height: 16px;
+  width: 10px;
+  height: 16px;
   background: #ef4444;
   border-radius: 2px 2px 3px 3px;
   left: 22%;
   bottom: 18px;
   opacity: 0;
-  box-shadow: 0 0 8px rgba(239,68,68,0.5);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
 }
+
 .rr-head {
   position: absolute;
-  width: 12px; height: 12px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: #f87171;
-  top: -13px; left: -1px;
-  border: 1.5px solid rgba(185,28,28,0.5);
+  top: -13px;
+  left: -1px;
+  border: 1.5px solid rgba(185, 28, 28, 0.5);
 }
+
 /* Legs */
 .rr-leg {
   position: absolute;
-  width: 4px; height: 8px;
+  width: 4px;
+  height: 8px;
   background: #dc2626;
   border-radius: 0 0 2px 2px;
   bottom: -7px;
 }
-.rr-ll { left: 0; }
-.rr-lr { right: 0; }
+
+.rr-ll {
+  left: 0;
+}
+
+.rr-lr {
+  right: 0;
+}
+
 .project-card:hover .rr-char {
   animation: rrCharJump 1.8s ease-in-out 0.2s infinite;
 }
-.project-card:hover .rr-ll { animation: rrLegL 0.3s linear 0.2s infinite; }
-.project-card:hover .rr-lr { animation: rrLegR 0.3s linear 0.2s infinite; }
+
+.project-card:hover .rr-ll {
+  animation: rrLegL 0.3s linear 0.2s infinite;
+}
+
+.project-card:hover .rr-lr {
+  animation: rrLegR 0.3s linear 0.2s infinite;
+}
 
 /* ── Red Runner Keyframes ── */
 
 /* Obstacles scroll from right edge → past left edge */
 @keyframes rrObsSlide {
-  0%   { left: calc(100% + 12px); }
-  100% { left: -18px; }
+  0% {
+    left: calc(100% + 12px);
+  }
+
+  100% {
+    left: -18px;
+  }
 }
 
 /* Character jumps when obstacles pass underneath */
 @keyframes rrCharJump {
-  0%   { bottom: 18px; opacity: 1; }
-  20%  { bottom: 18px; }
-  32%  { bottom: 55px; }   /* up */
-  44%  { bottom: 18px; }   /* land */
-  100% { bottom: 18px; }
+  0% {
+    bottom: 18px;
+    opacity: 1;
+  }
+
+  20% {
+    bottom: 18px;
+  }
+
+  32% {
+    bottom: 55px;
+  }
+
+  /* up */
+  44% {
+    bottom: 18px;
+  }
+
+  /* land */
+  100% {
+    bottom: 18px;
+  }
 }
 
 /* Alternating leg animation for running effect */
 @keyframes rrLegL {
-  0%   { transform: rotate(15deg); }
-  50%  { transform: rotate(-15deg); }
-  100% { transform: rotate(15deg); }
+  0% {
+    transform: rotate(15deg);
+  }
+
+  50% {
+    transform: rotate(-15deg);
+  }
+
+  100% {
+    transform: rotate(15deg);
+  }
 }
+
 @keyframes rrLegR {
-  0%   { transform: rotate(-15deg); }
-  50%  { transform: rotate(15deg); }
-  100% { transform: rotate(-15deg); }
+  0% {
+    transform: rotate(-15deg);
+  }
+
+  50% {
+    transform: rotate(15deg);
+  }
+
+  100% {
+    transform: rotate(-15deg);
+  }
 }
 
 /* ─── Glacier Run: 2D platformer scene ─── */
@@ -1522,10 +1633,12 @@ section {
 /* Icy ground strip */
 .gl-ground {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: 22px;
   background: linear-gradient(180deg, #bae6fd 0%, #7dd3fc 100%);
-  border-top: 2px solid rgba(255,255,255,0.55);
+  border-top: 2px solid rgba(255, 255, 255, 0.55);
 }
 
 /* Ice platforms */
@@ -1534,47 +1647,69 @@ section {
   height: 10px;
   background: linear-gradient(180deg, #e0f2fe, #7dd3fc);
   border-radius: 4px;
-  border-top: 2px solid rgba(255,255,255,0.7);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.35);
+  border-top: 2px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
   opacity: 0;
   transition: opacity 0.2s ease 0.05s;
 }
-.gl-p1 { width: 58px; left: 22%; bottom: 52px; }
-.gl-p2 { width: 52px; left: 57%; bottom: 78px; }
-.project-card:hover .gl-plat { opacity: 1; }
+
+.gl-p1 {
+  width: 58px;
+  left: 22%;
+  bottom: 52px;
+}
+
+.gl-p2 {
+  width: 52px;
+  left: 57%;
+  bottom: 78px;
+}
+
+.project-card:hover .gl-plat {
+  opacity: 1;
+}
 
 /* Spike obstacle on ground */
 .gl-spike {
   position: absolute;
   bottom: 22px;
   left: 44%;
-  width: 0; height: 0;
+  width: 0;
+  height: 0;
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-bottom: 16px solid #60a5fa;
-  filter: drop-shadow(0 0 4px rgba(96,165,250,0.6));
+  filter: drop-shadow(0 0 4px rgba(96, 165, 250, 0.6));
   opacity: 0;
   transition: opacity 0.2s ease 0.05s;
 }
-.project-card:hover .gl-spike { opacity: 1; }
+
+.project-card:hover .gl-spike {
+  opacity: 1;
+}
 
 /* Character body */
 .gl-char {
   position: absolute;
-  width: 10px; height: 14px;
+  width: 10px;
+  height: 14px;
   background: #fff;
   border-radius: 2px 2px 3px 3px;
   opacity: 0;
 }
+
 /* Character head */
 .gl-head {
   position: absolute;
-  width: 10px; height: 10px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: #fbbf24;
-  top: -11px; left: 0;
-  border: 1px solid rgba(0,0,0,0.15);
+  top: -11px;
+  left: 0;
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }
+
 .project-card:hover .gl-char {
   animation: glacierRun 2.2s ease-in-out 0.15s infinite;
 }
@@ -1582,52 +1717,147 @@ section {
 /* Snowflakes */
 .gl-snow {
   position: absolute;
-  width: 4px; height: 4px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.85);
   top: -6px;
   opacity: 0;
 }
-.gl-s1 { left: 10%; }
-.gl-s2 { left: 35%; }
-.gl-s3 { left: 65%; }
-.gl-s4 { left: 85%; }
-.project-card:hover .gl-s1 { animation: snowDrift 2.6s linear 0.0s infinite; }
-.project-card:hover .gl-s2 { animation: snowDrift 2.1s linear 0.7s infinite; }
-.project-card:hover .gl-s3 { animation: snowDrift 2.9s linear 0.3s infinite; }
-.project-card:hover .gl-s4 { animation: snowDrift 2.3s linear 1.1s infinite; }
+
+.gl-s1 {
+  left: 10%;
+}
+
+.gl-s2 {
+  left: 35%;
+}
+
+.gl-s3 {
+  left: 65%;
+}
+
+.gl-s4 {
+  left: 85%;
+}
+
+.project-card:hover .gl-s1 {
+  animation: snowDrift 2.6s linear 0.0s infinite;
+}
+
+.project-card:hover .gl-s2 {
+  animation: snowDrift 2.1s linear 0.7s infinite;
+}
+
+.project-card:hover .gl-s3 {
+  animation: snowDrift 2.9s linear 0.3s infinite;
+}
+
+.project-card:hover .gl-s4 {
+  animation: snowDrift 2.3s linear 1.1s infinite;
+}
 
 /* ── Keyframes ── */
 
 /* Character runs left→right, jumps onto P1 then P2, exits, loops */
 @keyframes glacierRun {
-  0%   { left: -14px; bottom: 22px; opacity: 0; }
-  3%   { opacity: 1; }
+  0% {
+    left: -14px;
+    bottom: 22px;
+    opacity: 0;
+  }
+
+  3% {
+    opacity: 1;
+  }
+
   /* run to base of P1 */
-  20%  { left: 19%;   bottom: 22px; }
+  20% {
+    left: 19%;
+    bottom: 22px;
+  }
+
   /* jump arc to P1 surface (bottom: 62px = 52px platform + 10px height) */
-  28%  { left: 25%;   bottom: 68px; }
-  32%  { left: 28%;   bottom: 62px; }
+  28% {
+    left: 25%;
+    bottom: 68px;
+  }
+
+  32% {
+    left: 28%;
+    bottom: 62px;
+  }
+
   /* run across P1 */
-  40%  { left: 38%;   bottom: 62px; }
+  40% {
+    left: 38%;
+    bottom: 62px;
+  }
+
   /* jump arc over spike toward P2 surface (bottom: 88px = 78px + 10px) */
-  50%  { left: 50%;   bottom: 106px; }
-  56%  { left: 57%;   bottom: 88px; }
+  50% {
+    left: 50%;
+    bottom: 106px;
+  }
+
+  56% {
+    left: 57%;
+    bottom: 88px;
+  }
+
   /* run across P2 */
-  65%  { left: 68%;   bottom: 88px; }
+  65% {
+    left: 68%;
+    bottom: 88px;
+  }
+
   /* drop off P2 back to ground */
-  74%  { left: 76%;   bottom: 48px; }
-  80%  { left: 82%;   bottom: 22px; }
+  74% {
+    left: 76%;
+    bottom: 48px;
+  }
+
+  80% {
+    left: 82%;
+    bottom: 22px;
+  }
+
   /* run to exit */
-  94%  { left: calc(100% + 12px); bottom: 22px; opacity: 1; }
-  95%  { left: -14px; bottom: 22px; opacity: 0; }
-  100% { left: -14px; bottom: 22px; opacity: 0; }
+  94% {
+    left: calc(100% + 12px);
+    bottom: 22px;
+    opacity: 1;
+  }
+
+  95% {
+    left: -14px;
+    bottom: 22px;
+    opacity: 0;
+  }
+
+  100% {
+    left: -14px;
+    bottom: 22px;
+    opacity: 0;
+  }
 }
 
 @keyframes snowDrift {
-  0%   { top: -6px;    opacity: 0.9; transform: translateX(0); }
-  50%  { transform: translateX(10px); }
-  100% { top: 100%;    opacity: 0.1; transform: translateX(-8px); }
+  0% {
+    top: -6px;
+    opacity: 0.9;
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(10px);
+  }
+
+  100% {
+    top: 100%;
+    opacity: 0.1;
+    transform: translateX(-8px);
+  }
 }
 
 /* ─── This Is Blast: Interactive colour-block grid simulation ─── */
@@ -1638,12 +1868,14 @@ section {
   align-items: center;
   justify-content: center;
 }
+
 .blast-grid {
   display: grid;
   grid-template-columns: repeat(10, 18px);
   grid-template-rows: repeat(3, 18px);
   gap: 3px;
 }
+
 .blast-cell {
   width: 18px;
   height: 18px;
@@ -1651,7 +1883,7 @@ section {
   opacity: 0;
   transform: scale(0);
   transition: background 0.1s ease, opacity 0.18s ease, transform 0.18s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.45);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.45);
 }
 
 /* ─── Overdrive Racing: Racetrack + CSS car + mini speedometer ─── */
@@ -1663,65 +1895,100 @@ section {
 /* ── Road ── */
 .race-road {
   position: absolute;
-  left: 0; right: 0;
-  top: 38%; height: 46px;
+  left: 0;
+  right: 0;
+  top: 38%;
+  height: 46px;
   background: #0f1117;
   border-top: 2px solid #374151;
   border-bottom: 2px solid #374151;
   opacity: 0;
   transition: opacity 0.2s ease 0.05s;
 }
-.race-road::before {                         /* dashed yellow centre line */
+
+.race-road::before {
+  /* dashed yellow centre line */
   content: '';
   position: absolute;
-  left: 0; right: 0;
-  top: 50%; transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
   height: 2px;
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(250,204,21,0.8) 0px,  rgba(250,204,21,0.8) 18px,
-    transparent          18px,  transparent          32px
-  );
+  background: repeating-linear-gradient(90deg,
+      rgba(250, 204, 21, 0.8) 0px, rgba(250, 204, 21, 0.8) 18px,
+      transparent 18px, transparent 32px);
 }
-.project-card:hover .race-road { opacity: 1; }
+
+.project-card:hover .race-road {
+  opacity: 1;
+}
 
 /* ── Wind / speed streaks — appear when car is mid-track ── */
 .race-wind {
   position: absolute;
-  height: 2px; width: 42px;
+  height: 2px;
+  width: 42px;
   border-radius: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), rgba(255,255,255,0.2));
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2));
   opacity: 0;
 }
-.rw1 { top: calc(38% + 10px); left: 58%; }
-.rw2 { top: calc(38% + 22px); left: 52%; }
-.rw3 { top: calc(38% + 33px); left: 60%; }
-.project-card:hover .rw1 { animation: windStreak 0.38s ease-out 0.80s both; }
-.project-card:hover .rw2 { animation: windStreak 0.38s ease-out 0.92s both; }
-.project-card:hover .rw3 { animation: windStreak 0.38s ease-out 1.04s both; }
+
+.rw1 {
+  top: calc(38% + 10px);
+  left: 58%;
+}
+
+.rw2 {
+  top: calc(38% + 22px);
+  left: 52%;
+}
+
+.rw3 {
+  top: calc(38% + 33px);
+  left: 60%;
+}
+
+.project-card:hover .rw1 {
+  animation: windStreak 0.38s ease-out 0.80s both;
+}
+
+.project-card:hover .rw2 {
+  animation: windStreak 0.38s ease-out 0.92s both;
+}
+
+.project-card:hover .rw3 {
+  animation: windStreak 0.38s ease-out 1.04s both;
+}
 
 /* ── Checkered finish flag ── */
 .race-finish-flag {
   position: absolute;
   right: 20px;
   top: calc(38% - 10px);
-  height: 66px; width: 10px;
+  height: 66px;
+  width: 10px;
   background: repeating-conic-gradient(#fff 0% 25%, #111 0% 50%) 0 0 / 5px 5px;
   border-radius: 1px;
-  box-shadow: 0 0 8px rgba(255,255,255,0.25);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
   opacity: 0;
   transition: opacity 0.25s ease 0.1s;
 }
-.project-card:hover .race-finish-flag { opacity: 1; }
+
+.project-card:hover .race-finish-flag {
+  opacity: 1;
+}
 
 /* ── CSS car wrapper — blasts across at top speed ── */
 .race-car-wrap {
   position: absolute;
-  width: 60px; height: 28px;
+  width: 60px;
+  height: 28px;
   left: -68px;
   top: calc(38% + 8px);
   opacity: 0;
 }
+
 .project-card:hover .race-car-wrap {
   opacity: 1;
   animation: raceCarDrive 0.55s ease-out 0.1s both;
@@ -1730,161 +1997,252 @@ section {
 /* Car body — red supercar, very low & wide, sharp aerodynamic nose (right = front) */
 .race-car-shell {
   position: absolute;
-  width: 60px; height: 10px;
+  width: 60px;
+  height: 10px;
   background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
   /* sharp pointed front-right, flat rear-left, slight rear diffuser curve */
   clip-path: polygon(0% 40%, 6% 0%, 90% 0%, 100% 40%, 100% 100%, 0% 100%);
-  top: 10px; left: 0;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.7);
+  top: 10px;
+  left: 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
 }
-.race-car-shell::before {              /* racing stripe */
+
+.race-car-shell::before {
+  /* racing stripe */
   content: '';
   position: absolute;
-  left: 8px; right: 16px;
-  top: 2px; height: 3px;
-  background: rgba(255,255,255,0.25);
+  left: 8px;
+  right: 16px;
+  top: 2px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.25);
   border-radius: 1px;
 }
-.race-car-shell::after {               /* exhaust glow at rear */
+
+.race-car-shell::after {
+  /* exhaust glow at rear */
   content: '';
   position: absolute;
-  left: -3px; top: 3px;
-  width: 5px; height: 4px;
-  background: rgba(255,160,0,0.7);
+  left: -3px;
+  top: 3px;
+  width: 5px;
+  height: 4px;
+  background: rgba(255, 160, 0, 0.7);
   border-radius: 0 0 2px 2px;
-  box-shadow: -2px 0 6px rgba(255,120,0,0.8);
+  box-shadow: -2px 0 6px rgba(255, 120, 0, 0.8);
 }
 
 /* Cockpit — very low, F1 style */
 .race-car-roof {
   position: absolute;
-  width: 14px; height: 7px;
-  background: linear-gradient(180deg, rgba(200,230,255,0.9), rgba(120,180,255,0.6));
+  width: 14px;
+  height: 7px;
+  background: linear-gradient(180deg, rgba(200, 230, 255, 0.9), rgba(120, 180, 255, 0.6));
   border-radius: 4px 4px 0 0;
-  top: 4px; left: 24px;
+  top: 4px;
+  left: 24px;
 }
-.race-car-roof::after {                /* rear wing / spoiler */
+
+.race-car-roof::after {
+  /* rear wing / spoiler */
   content: '';
   position: absolute;
-  left: -20px; top: -3px;
-  width: 12px; height: 4px;
+  left: -20px;
+  top: -3px;
+  width: 12px;
+  height: 4px;
   background: #ef4444;
   border-radius: 1px;
-  border-top: 1px solid rgba(255,255,255,0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* Front wheel (right side of car = front) */
 .race-car-wf {
   position: absolute;
-  width: 12px; height: 12px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: #111827;
   border: 2px solid #4b5563;
-  bottom: 0; right: 5px;
+  bottom: 0;
+  right: 5px;
 }
-.race-car-wf::after { content:''; position:absolute; width:5px;height:5px;border-radius:50%;background:#6b7280;top:50%;left:50%;transform:translate(-50%,-50%); }
+
+.race-car-wf::after {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #6b7280;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 /* Rear wheel (left side of car = rear) */
 .race-car-wr {
   position: absolute;
-  width: 12px; height: 12px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: #111827;
   border: 2px solid #4b5563;
-  bottom: 0; left: 5px;
+  bottom: 0;
+  left: 5px;
 }
-.race-car-wr::after { content:''; position:absolute; width:5px;height:5px;border-radius:50%;background:#6b7280;top:50%;left:50%;transform:translate(-50%,-50%); }
+
+.race-car-wr::after {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #6b7280;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 /* ── Mini speedometer — bottom left ── */
 .race-mini-speedo {
   position: absolute;
-  bottom: 5px; left: 8px;
-  width: 52px; height: 30px;
-  overflow: hidden;                    /* clips to semicircle */
+  bottom: 5px;
+  left: 8px;
+  width: 52px;
+  height: 30px;
+  overflow: hidden;
+  /* clips to semicircle */
 }
+
 .race-mini-ring {
   position: absolute;
-  width: 48px; height: 48px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  border: 2px solid rgba(80,160,255,0.5);
-  background: radial-gradient(circle, rgba(5,10,25,0.97), rgba(10,20,50,0.88));
-  box-shadow: 0 0 10px rgba(80,160,255,0.2);
-  top: 0; left: 2px;
+  border: 2px solid rgba(80, 160, 255, 0.5);
+  background: radial-gradient(circle, rgba(5, 10, 25, 0.97), rgba(10, 20, 50, 0.88));
+  box-shadow: 0 0 10px rgba(80, 160, 255, 0.2);
+  top: 0;
+  left: 2px;
   opacity: 0;
   transition: opacity 0.25s ease 0.1s;
 }
-.project-card:hover .race-mini-ring { opacity: 1; }
+
+.project-card:hover .race-mini-ring {
+  opacity: 1;
+}
 
 .race-mini-arc {
   position: absolute;
-  width: 38px; height: 38px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  top: 5px; left: 7px;
-  background: conic-gradient(
-    from 185deg,
-    #22c55e  0deg  55deg,
-    #facc15  55deg 105deg,
-    #ef4444  105deg 175deg,
-    transparent 175deg
-  );
+  top: 5px;
+  left: 7px;
+  background: conic-gradient(from 185deg,
+      #22c55e 0deg 55deg,
+      #facc15 55deg 105deg,
+      #ef4444 105deg 175deg,
+      transparent 175deg);
   -webkit-mask: radial-gradient(circle at center, transparent 12px, black 13px);
-  mask:          radial-gradient(circle at center, transparent 12px, black 13px);
+  mask: radial-gradient(circle at center, transparent 12px, black 13px);
   opacity: 0;
   transition: opacity 0.3s ease 0.15s;
 }
-.project-card:hover .race-mini-arc { opacity: 1; }
+
+.project-card:hover .race-mini-arc {
+  opacity: 1;
+}
 
 /* Mini needle — SAME ease-in + 1.5s as car so they sync perfectly */
 .race-mini-nwrap {
   position: absolute;
-  left: 26px; top: 24px;            /* centre of 52x48 ring */
-  width: 0; height: 0;
-  transform: rotate(-85deg);         /* start = 0 RPM */
+  left: 26px;
+  top: 24px;
+  /* centre of 52x48 ring */
+  width: 0;
+  height: 0;
+  transform: rotate(-85deg);
+  /* start = 0 RPM */
   transform-origin: center center;
   opacity: 0;
   transition: opacity 0.1s ease 0.15s;
 }
+
 .project-card:hover .race-mini-nwrap {
   opacity: 1;
-  animation: miniNeedleSweep 0.55s ease-out 0.1s both; /* ← same timing as car */
+  animation: miniNeedleSweep 0.55s ease-out 0.1s both;
+  /* ← same timing as car */
 }
+
 .race-mini-needle {
   position: absolute;
-  width: 2px; height: 17px;
+  width: 2px;
+  height: 17px;
   background: linear-gradient(180deg, #ff4444, #ff8800 70%, transparent);
   border-radius: 1px;
-  bottom: 0; left: -1px;
-  box-shadow: 0 0 5px rgba(255,80,0,0.8);
+  bottom: 0;
+  left: -1px;
+  box-shadow: 0 0 5px rgba(255, 80, 0, 0.8);
 }
+
 .race-mini-nwrap::after {
   content: '';
   position: absolute;
-  width: 6px; height: 6px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: radial-gradient(circle, #ff8800, #ff4444);
-  top: -3px; left: -3px;
-  box-shadow: 0 0 5px rgba(255,100,0,0.7);
+  top: -3px;
+  left: -3px;
+  box-shadow: 0 0 5px rgba(255, 100, 0, 0.7);
 }
 
 /* ── Keyframes ── */
 @keyframes raceCarDrive {
-  0%   { left: -68px; }
-  100% { left: calc(100% - 88px); }   /* stops just before finish flag */
+  0% {
+    left: -68px;
+  }
+
+  100% {
+    left: calc(100% - 88px);
+  }
+
+  /* stops just before finish flag */
 }
+
 @keyframes miniNeedleSweep {
-  0%   { transform: rotate(-85deg); }  /* 0 RPM */
-  100% { transform: rotate( 82deg); }  /* redline - hits fast */
+  0% {
+    transform: rotate(-85deg);
+  }
+
+  /* 0 RPM */
+  100% {
+    transform: rotate(82deg);
+  }
+
+  /* redline - hits fast */
 }
+
 @keyframes windStreak {
-  0%   { opacity: 0.9; transform: translateX( 0); }
-  100% { opacity: 0;   transform: translateX(-80px); }
+  0% {
+    opacity: 0.9;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
 }
 
 /* Outer wrapper — clips circle to upper semicircle only */
 .race-dial-wrap {
   position: absolute;
   width: 150px;
-  height: 82px;          /* exactly half the circle height */
+  height: 82px;
+  /* exactly half the circle height */
   overflow: hidden;
   top: 50%;
   left: 50%;
@@ -1900,11 +2258,15 @@ section {
   border: 3px solid rgba(80, 160, 255, 0.35);
   box-shadow: 0 0 18px rgba(80, 160, 255, 0.2), inset 0 0 30px rgba(0, 0, 30, 0.6);
   background: radial-gradient(circle at center, rgba(5, 10, 25, 0.95) 0%, rgba(10, 20, 50, 0.85) 100%);
-  top: 0; left: 2px;
+  top: 0;
+  left: 2px;
   opacity: 0;
   transition: opacity 0.25s ease 0.05s;
 }
-.project-card:hover .race-dial-ring { opacity: 1; }
+
+.project-card:hover .race-dial-ring {
+  opacity: 1;
+}
 
 /* Coloured arc: green → yellow → red (painted as background on a ring) */
 .race-dial-arc {
@@ -1912,20 +2274,22 @@ section {
   width: 118px;
   height: 118px;
   border-radius: 50%;
-  top: 14px; left: 16px;
-  background: conic-gradient(
-    from 185deg,
-    #22c55e  0deg  55deg,
-    #facc15  55deg 105deg,
-    #ef4444  105deg 175deg,
-    transparent 175deg
-  );
+  top: 14px;
+  left: 16px;
+  background: conic-gradient(from 185deg,
+      #22c55e 0deg 55deg,
+      #facc15 55deg 105deg,
+      #ef4444 105deg 175deg,
+      transparent 175deg);
   -webkit-mask: radial-gradient(circle at center, transparent 44px, black 45px);
-  mask:          radial-gradient(circle at center, transparent 44px, black 45px);
+  mask: radial-gradient(circle at center, transparent 44px, black 45px);
   opacity: 0;
   transition: opacity 0.3s ease 0.15s;
 }
-.project-card:hover .race-dial-arc { opacity: 1; }
+
+.project-card:hover .race-dial-arc {
+  opacity: 1;
+}
 
 /* Tick marks — 5 evenly spaced, rotated around the dial center */
 .race-tick {
@@ -1937,17 +2301,39 @@ section {
   /* All ticks pivot from the dial center: (75px, 73px) */
   left: 74px;
   top: 14px;
-  transform-origin: center 59px;   /* 59px = 73px center - 14px top position */
+  transform-origin: center 59px;
+  /* 59px = 73px center - 14px top position */
   opacity: 0;
   transition: opacity 0.2s ease 0.2s;
 }
-.project-card:hover .race-tick { opacity: 1; }
+
+.project-card:hover .race-tick {
+  opacity: 1;
+}
+
 /* Spread ticks across the arc (-85° → +85°) */
-.race-t1 { transform: rotate(-85deg); }
-.race-t2 { transform: rotate(-42deg); }
-.race-t3 { transform: rotate(  0deg); }
-.race-t4 { transform: rotate( 42deg); }
-.race-t5 { transform: rotate( 85deg); background: rgba(239, 68, 68, 0.8); } /* redline tick */
+.race-t1 {
+  transform: rotate(-85deg);
+}
+
+.race-t2 {
+  transform: rotate(-42deg);
+}
+
+.race-t3 {
+  transform: rotate(0deg);
+}
+
+.race-t4 {
+  transform: rotate(42deg);
+}
+
+.race-t5 {
+  transform: rotate(85deg);
+  background: rgba(239, 68, 68, 0.8);
+}
+
+/* redline tick */
 
 /* Needle wrapper — pivots from dial centre (75px, 73px) */
 .race-needle-wrap {
@@ -1956,11 +2342,13 @@ section {
   top: 73px;
   width: 0;
   height: 0;
-  transform: rotate(-90deg);   /* start position: far left = 0 RPM */
+  transform: rotate(-90deg);
+  /* start position: far left = 0 RPM */
   transform-origin: center center;
   opacity: 0;
   transition: opacity 0.1s ease 0.3s;
 }
+
 .project-card:hover .race-needle-wrap {
   opacity: 1;
   animation: needleSweep 1.1s cubic-bezier(0.33, 1, 0.68, 1) 0.3s both;
@@ -1971,7 +2359,7 @@ section {
   position: absolute;
   width: 3px;
   height: 52px;
-  background: linear-gradient(180deg, #ff4444 0%, #ff8800 60%, rgba(255,100,0,0.3) 100%);
+  background: linear-gradient(180deg, #ff4444 0%, #ff8800 60%, rgba(255, 100, 0, 0.3) 100%);
   border-radius: 2px 2px 0 0;
   bottom: 0;
   left: -1px;
@@ -1986,7 +2374,8 @@ section {
   height: 10px;
   border-radius: 50%;
   background: radial-gradient(circle, #ff8800, #ff4444);
-  top: -5px; left: -5px;
+  top: -5px;
+  left: -5px;
   box-shadow: 0 0 8px rgba(255, 100, 0, 0.7);
 }
 
@@ -2004,7 +2393,10 @@ section {
   opacity: 0;
   transition: opacity 0.3s ease 0.4s;
 }
-.project-card:hover .race-dial-label { opacity: 1; }
+
+.project-card:hover .race-dial-label {
+  opacity: 1;
+}
 
 /* Redline zone glow at far right of arc */
 .race-dial-redline {
@@ -2020,15 +2412,35 @@ section {
   opacity: 0;
   transition: opacity 0.4s ease 1.1s;
 }
-.project-card:hover .race-dial-redline { opacity: 1; }
+
+.project-card:hover .race-dial-redline {
+  opacity: 1;
+}
 
 /* Needle sweep: 0 RPM (−90°) → past redline (+95°) → settles at redline (+82°) */
 @keyframes needleSweep {
-  0%   { transform: rotate(-90deg); }
-  65%  { transform: rotate(100deg); }   /* overshoot into red */
-  80%  { transform: rotate( 72deg); }   /* bounce back */
-  90%  { transform: rotate( 90deg); }   /* settle at redline */
-  100% { transform: rotate( 85deg); }
+  0% {
+    transform: rotate(-90deg);
+  }
+
+  65% {
+    transform: rotate(100deg);
+  }
+
+  /* overshoot into red */
+  80% {
+    transform: rotate(72deg);
+  }
+
+  /* bounce back */
+  90% {
+    transform: rotate(90deg);
+  }
+
+  /* settle at redline */
+  100% {
+    transform: rotate(85deg);
+  }
 }
 
 /* ─── HemoDialysis Simulator: Blood flow through dialyzer ─── */
@@ -2050,6 +2462,7 @@ section {
   box-shadow: 0 0 10px rgba(180, 0, 0, 0.6);
   opacity: 0;
 }
+
 .project-card:hover .hd-tube-in {
   animation: hdTubeIn 0.45s ease-out 0.1s both;
 }
@@ -2065,13 +2478,14 @@ section {
   border-radius: 5px;
   border: 2px solid rgba(0, 210, 180, 0.7);
   background: rgba(0, 80, 70, 0.35);
-  box-shadow: 0 0 14px rgba(0, 210, 180, 0.4), inset 0 0 8px rgba(0,160,140,0.2);
+  box-shadow: 0 0 14px rgba(0, 210, 180, 0.4), inset 0 0 8px rgba(0, 160, 140, 0.2);
   opacity: 0;
   transition: opacity 0.25s ease 0.52s;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .project-card:hover .hd-dialyzer {
   opacity: 1;
   animation: hdDialyzerPulse 1.2s ease-in-out 0.55s infinite alternate;
@@ -2082,13 +2496,11 @@ section {
   width: 100%;
   height: 100%;
   border-radius: 3px;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent          0px,
-    transparent          4px,
-    rgba(0,210,180,0.25) 4px,
-    rgba(0,210,180,0.25) 5px
-  );
+  background: repeating-linear-gradient(90deg,
+      transparent 0px,
+      transparent 4px,
+      rgba(0, 210, 180, 0.25) 4px,
+      rgba(0, 210, 180, 0.25) 5px);
 }
 
 /* Outgoing clean-blood tube: lighter rose/pink, dialyzer → right */
@@ -2104,6 +2516,7 @@ section {
   box-shadow: 0 0 10px rgba(220, 80, 80, 0.5);
   opacity: 0;
 }
+
 .project-card:hover .hd-tube-out {
   animation: hdTubeOut 0.45s ease-out 0.75s both;
 }
@@ -2119,30 +2532,82 @@ section {
   box-shadow: 0 0 6px rgba(255, 140, 0, 0.7);
   opacity: 0;
 }
-.hd-w1 { top: calc(50% + 26px); }
-.hd-w2 { top: calc(50% + 26px); left: calc(50% + 6px); }
-.hd-w3 { top: calc(50% + 26px); left: calc(50% - 14px); }
 
-.project-card:hover .hd-w1 { animation: hdWasteDrop 0.5s ease-in 0.85s both; }
-.project-card:hover .hd-w2 { animation: hdWasteDrop 0.5s ease-in 1.00s both; }
-.project-card:hover .hd-w3 { animation: hdWasteDrop 0.5s ease-in 1.15s both; }
+.hd-w1 {
+  top: calc(50% + 26px);
+}
+
+.hd-w2 {
+  top: calc(50% + 26px);
+  left: calc(50% + 6px);
+}
+
+.hd-w3 {
+  top: calc(50% + 26px);
+  left: calc(50% - 14px);
+}
+
+.project-card:hover .hd-w1 {
+  animation: hdWasteDrop 0.5s ease-in 0.85s both;
+}
+
+.project-card:hover .hd-w2 {
+  animation: hdWasteDrop 0.5s ease-in 1.00s both;
+}
+
+.project-card:hover .hd-w3 {
+  animation: hdWasteDrop 0.5s ease-in 1.15s both;
+}
 
 @keyframes hdTubeIn {
-  0%   { opacity: 1; width: 0; }
-  100% { opacity: 1; width: calc(50% - 22px); }
+  0% {
+    opacity: 1;
+    width: 0;
+  }
+
+  100% {
+    opacity: 1;
+    width: calc(50% - 22px);
+  }
 }
+
 @keyframes hdTubeOut {
-  0%   { opacity: 1; width: 0; }
-  100% { opacity: 1; width: calc(50% - 22px); }
+  0% {
+    opacity: 1;
+    width: 0;
+  }
+
+  100% {
+    opacity: 1;
+    width: calc(50% - 22px);
+  }
 }
+
 @keyframes hdDialyzerPulse {
-  0%   { box-shadow: 0 0 14px rgba(0,210,180,0.4), inset 0 0 8px rgba(0,160,140,0.2); }
-  100% { box-shadow: 0 0 22px rgba(0,210,180,0.75), inset 0 0 14px rgba(0,210,180,0.35); }
+  0% {
+    box-shadow: 0 0 14px rgba(0, 210, 180, 0.4), inset 0 0 8px rgba(0, 160, 140, 0.2);
+  }
+
+  100% {
+    box-shadow: 0 0 22px rgba(0, 210, 180, 0.75), inset 0 0 14px rgba(0, 210, 180, 0.35);
+  }
 }
+
 @keyframes hdWasteDrop {
-  0%   { opacity: 1; transform: translateY(0);   }
-  60%  { opacity: 1; transform: translateY(22px); }
-  100% { opacity: 0; transform: translateY(32px); }
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(22px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(32px);
+  }
 }
 
 /* ─── TIR & Dispersion: Prism splits white beam into rainbow fan ─── */
